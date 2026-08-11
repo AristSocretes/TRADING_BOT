@@ -1,0 +1,14 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+bot.ipynb
+confing.py
+data/
+models/
+logs/
+results/
+*.db
