@@ -23,8 +23,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-import numpy as np
-
 from bot.ai.backtest import metrics, rl_backtest
 from bot.ai.rl_trainer import train
 from bot.data.cache import DataCache
@@ -58,7 +56,7 @@ def main():
     parser.add_argument("--timesteps", type=int, default=1_048_576)
     parser.add_argument("--timesteps-1m", type=int, default=262_144)
     parser.add_argument("--seeds", default="42,7")
-    parser.add_argument("--n-envs", type=int, default=256)
+    parser.add_argument("--n-envs", type=int, default=64)
     parser.add_argument("--window", type=int, default=60)
     parser.add_argument("--net-arch", default="256,256")
     parser.add_argument("--test-size", type=float, default=0.2)
@@ -116,9 +114,11 @@ def main():
             for seed in seeds:
                 t0 = time.time()
                 seed_name = f"{symbol}_{granularity}_seed{seed}"
+                seed_dir = outdir / seed_name
+                seed_dir.mkdir(parents=True, exist_ok=True)
                 model_path = train(
                     train_df,
-                    model_path=outdir / f"{seed_name}.zip",
+                    model_path=seed_dir / f"{seed_name}.zip",
                     total_timesteps=timesteps,
                     n_envs=args.n_envs,
                     device=args.device,
@@ -134,7 +134,7 @@ def main():
                 )
                 from stable_baselines3 import PPO
 
-                best = Path(model_path).parent / "best_model.zip"
+                best = seed_dir / "best_model.zip"
                 use = best if best.exists() else model_path
                 model = PPO.load(str(use), device="cpu")
                 curve, trades = rl_backtest(
@@ -153,8 +153,14 @@ def main():
 
             best_cand = max(candidates, key=lambda c: c["sharpe"])
             final_name = f"{symbol}_{granularity}.zip"
-            shutil.copyfile(outdir / f"{symbol}_{granularity}_seed{best_cand['seed']}.zip",
-                            outdir / final_name)
+            best_src = (
+                outdir / f"{symbol}_{granularity}_seed{best_cand['seed']}" / "best_model.zip"
+            )
+            src = best_src if best_src.exists() else (
+                outdir / f"{symbol}_{granularity}_seed{best_cand['seed']}"
+                / f"{symbol}_{granularity}_seed{best_cand['seed']}.zip"
+            )
+            shutil.copyfile(src, outdir / final_name)
 
             bh = float(test_df["close"].iloc[-1] / test_df["close"].iloc[args.window] - 1)
             entry = {

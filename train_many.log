@@ -1,0 +1,31 @@
+
+=== BTCUSDT 1h: 43793 rows (2021-08-10 14:00:00+00:00 .. 2026-08-09 13:00:00+00:00) cross=[] ===
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 7.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249856, episode_reward=-125.09 +/- 3.05
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -125     |
+| time/              |          |
+|    total_timesteps | 249856   |
+---------------------------------
+New best mean reward!
+Eval num_timesteps=499712, episode_reward=-127.17 +/- 3.39
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -127     |
+| time/              |          |
+|    total_timesteps | 499712   |
+---------------------------------
+-------------------------------
+| time/              |        |
+|    fps             | 5712   |
+|    iterations      | 1      |
+|    time_elapsed    | 91     |
+|    total_timesteps | 524288 |
+-------------------------------

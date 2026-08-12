@@ -24,8 +24,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-import numpy as np
-
 from bot.ai.backtest import metrics, rl_backtest
 from bot.ai.rl_trainer import train
 from bot.data.cache import DataCache
@@ -52,23 +50,23 @@ def parse_list(raw, default):
 
 
 CONFIGS = {
-    "legacy_lowcost": dict(timesteps=262_144, entropy=0.02, n_envs=256, **LOWCOST,
+    "legacy_lowcost": dict(timesteps=262_144, entropy=0.02, n_envs=128, **LOWCOST,
                            trade_penalty=0.02, risk_penalty=0.05, align_bonus=0.05),
-    "legacy_lowcost_1M": dict(timesteps=1_048_576, entropy=0.02, n_envs=256, **LOWCOST,
+    "legacy_lowcost_1M": dict(timesteps=1_048_576, entropy=0.02, n_envs=128, **LOWCOST,
                               trade_penalty=0.02, risk_penalty=0.05, align_bonus=0.05),
-    "mid": dict(timesteps=262_144, entropy=0.02, n_envs=256,
+    "mid": dict(timesteps=262_144, entropy=0.02, n_envs=128,
                 spread=0.0003, slippage=2.5e-5,
                 trade_penalty=0.035, risk_penalty=0.075, align_bonus=0.075),
-    "legacy_noalign": dict(timesteps=262_144, entropy=0.02, n_envs=256, **LOWCOST,
+    "legacy_noalign": dict(timesteps=262_144, entropy=0.02, n_envs=128, **LOWCOST,
                            trade_penalty=0.02, risk_penalty=0.05, align_bonus=0.0),
-    "legacy_raw": dict(timesteps=262_144, entropy=0.02, n_envs=256, **LOWCOST,
+    "legacy_raw": dict(timesteps=262_144, entropy=0.02, n_envs=128, **LOWCOST,
                        trade_penalty=0.0, risk_penalty=0.05, align_bonus=0.0),
-    "robust_1M": dict(timesteps=1_048_576, entropy=0.02, n_envs=256,
+    "robust_1M": dict(timesteps=1_048_576, entropy=0.02, n_envs=128,
                       spread=settings.SPREAD, slippage=settings.SLIPPAGE,
                       trade_penalty=settings.TRADE_PENALTY,
                       risk_penalty=settings.RISK_PENALTY,
                       align_bonus=settings.ALIGN_BONUS),
-    "full_feat_lowcost": dict(timesteps=262_144, entropy=0.02, n_envs=128, **LOWCOST,
+    "full_feat_lowcost": dict(timesteps=262_144, entropy=0.02, n_envs=64, **LOWCOST,
                               trade_penalty=0.02, risk_penalty=0.05, align_bonus=0.05,
                               full_features=True),
 }
@@ -193,6 +191,7 @@ def main():
                         trade_penalty=cfg["trade_penalty"],
                         risk_penalty=cfg["risk_penalty"],
                         align_bonus=cfg["align_bonus"],
+                        hyperparams={"buffer_device": "gpu"},
                     )
                     from stable_baselines3 import PPO
 
@@ -223,11 +222,15 @@ def main():
 
             best = max(candidates, key=lambda c: c["sharpe"])
             final_name = f"{symbol}_{granularity}.zip"
-            best_src = (outdir / f"{symbol}_{granularity}"
-                        / f"{best['config']}_seed{best['seed']}" / "best_model.zip")
+            best_src = (
+                outdir / f"{symbol}_{granularity}"
+                / f"{best['config']}_seed{best['seed']}" / "best_model.zip"
+            )
             src = best_src if best_src.exists() else (
                 outdir / f"{symbol}_{granularity}"
-                / f"{best['config']}_seed{best['seed']}" / f"{best['config']}_seed{best['seed']}.zip")
+                / f"{best['config']}_seed{best['seed']}"
+                / f"{best['config']}_seed{best['seed']}.zip"
+            )
             shutil.copyfile(src, outdir / final_name)
 
             if (symbol, granularity) == ("BTCUSDT", "5m"):
