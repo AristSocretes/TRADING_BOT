@@ -78,6 +78,7 @@ def train(
     max_grad_norm=0.5,
     lr_schedule=False,
     seed=42,
+    feature_columns=None,
 ):
     device = resolve_device(device)
     print(f"  device: {device}")
@@ -100,13 +101,19 @@ def train(
         "reward_clip": reward_clip,
         "seed": seed,
         "episode_len": 2000,
+        "feature_columns": feature_columns,
     }
     # Compute features once, share the matrix across all parallel envs
 
     from bot.data.features import normalized_frame
 
     features_arr = (
-        normalized_frame(df, stats=feature_stats, cross_asset_dfs=cross_asset_dfs)
+        normalized_frame(
+            df,
+            stats=feature_stats,
+            cross_asset_dfs=cross_asset_dfs,
+            feature_columns=feature_columns,
+        )
         .replace([np.inf, -np.inf], 0.0)
         .fillna(0.0)
         .to_numpy(dtype=np.float32)

@@ -100,8 +100,11 @@ def main():
                     cdf = cdf[cdf.index <= args.data_end]
                 if not cdf.empty:
                     cross_asset_dfs[other] = cdf
-            print(f"\n=== {symbol} {granularity}: {len(df)} rows "
-                  f"({df.index[0]} .. {df.index[-1]}) cross={list(cross_asset_dfs)} ===", flush=True)
+            print(
+                f"\n=== {symbol} {granularity}: {len(df)} rows "
+                f"({df.index[0]} .. {df.index[-1]}) cross={list(cross_asset_dfs)} ===",
+                flush=True,
+            )
 
             n = len(df)
             n_test = int(n * args.test_size / args.splits)
@@ -149,7 +152,8 @@ def main():
                 )
                 ppy = periods_per_year(granularity)
                 report = {"fold": fold, **metrics(curve, trades, periods_per_year=ppy)}
-                report["buy_hold"] = float(test_df["close"].iloc[-1] / test_df["close"].iloc[60] - 1)
+                bh = float(test_df["close"].iloc[-1] / test_df["close"].iloc[60] - 1)
+                report["buy_hold"] = bh
                 report["train_rows"] = len(train_df)
                 report["test_rows"] = len(test_df)
                 report["test_start"] = str(test_df.index[0])

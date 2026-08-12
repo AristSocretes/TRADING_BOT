@@ -28,6 +28,7 @@ class ForexTradingEnv(gym.Env):
         slippage_range=None,
         reward_clip=0.25,
         seed=0,
+        feature_columns=None,
     ):
         super().__init__()
         self.window = window
@@ -49,7 +50,12 @@ class ForexTradingEnv(gym.Env):
         self.highs = df["high"].to_numpy(dtype=np.float64)
         if features_arr is None:
             features_arr = (
-                normalized_frame(df, stats=feature_stats, cross_asset_dfs=cross_asset_dfs)
+                normalized_frame(
+                    df,
+                    stats=feature_stats,
+                    cross_asset_dfs=cross_asset_dfs,
+                    feature_columns=feature_columns,
+                )
                 .replace([np.inf, -np.inf], 0.0)
                 .fillna(0.0)
                 .to_numpy(dtype=np.float32)

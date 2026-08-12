@@ -64,6 +64,7 @@ def rl_backtest(
     sup_probs=None,
     cross_asset_dfs=None,
     features_arr=None,
+    feature_columns=None,
 ):
     from bot.ai.env import ForexTradingEnv
 
@@ -80,6 +81,7 @@ def rl_backtest(
         sup_probs=sup_probs,
         cross_asset_dfs=cross_asset_dfs,
         features_arr=features_arr,
+        feature_columns=feature_columns,
     )
     obs, _ = env.reset(options={"start_idx": window})
     closes = df["close"].to_numpy(dtype=np.float64)
