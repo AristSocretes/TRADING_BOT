@@ -50,18 +50,18 @@ def parse_list(raw, default):
 
 
 CONFIGS = {
-    "legacy_lowcost": dict(timesteps=262_144, entropy=0.02, n_envs=128, **LOWCOST,
+    "legacy_lowcost": dict(timesteps=262_144, entropy=0.02, n_envs=64, **LOWCOST,
                            trade_penalty=0.02, risk_penalty=0.05, align_bonus=0.05),
-    "legacy_lowcost_1M": dict(timesteps=1_048_576, entropy=0.02, n_envs=128, **LOWCOST,
+    "legacy_lowcost_1M": dict(timesteps=1_048_576, entropy=0.02, n_envs=64, **LOWCOST,
                               trade_penalty=0.02, risk_penalty=0.05, align_bonus=0.05),
-    "mid": dict(timesteps=262_144, entropy=0.02, n_envs=128,
+    "mid": dict(timesteps=262_144, entropy=0.02, n_envs=64,
                 spread=0.0003, slippage=2.5e-5,
                 trade_penalty=0.035, risk_penalty=0.075, align_bonus=0.075),
-    "legacy_noalign": dict(timesteps=262_144, entropy=0.02, n_envs=128, **LOWCOST,
+    "legacy_noalign": dict(timesteps=262_144, entropy=0.02, n_envs=64, **LOWCOST,
                            trade_penalty=0.02, risk_penalty=0.05, align_bonus=0.0),
-    "legacy_raw": dict(timesteps=262_144, entropy=0.02, n_envs=128, **LOWCOST,
+    "legacy_raw": dict(timesteps=262_144, entropy=0.02, n_envs=64, **LOWCOST,
                        trade_penalty=0.0, risk_penalty=0.05, align_bonus=0.0),
-    "robust_1M": dict(timesteps=1_048_576, entropy=0.02, n_envs=128,
+    "robust_1M": dict(timesteps=1_048_576, entropy=0.02, n_envs=64,
                       spread=settings.SPREAD, slippage=settings.SLIPPAGE,
                       trade_penalty=settings.TRADE_PENALTY,
                       risk_penalty=settings.RISK_PENALTY,
@@ -117,6 +117,8 @@ def main():
                         help="Pin the data snapshot (e.g. '2026-08-11 23:15')")
     parser.add_argument("--smoke", action="store_true",
                         help="Train 1 candidate only (fast end-to-end check)")
+    parser.add_argument("--skip-existing", action="store_true",
+                        help="Skip (symbol, granularity) pairs already in the registry")
     args = parser.parse_args()
 
     symbols = parse_list(args.symbols, ["BTCUSDT", "ETHUSDT", "SOLUSDT"])
@@ -131,6 +133,11 @@ def main():
     total0 = time.time()
     for symbol in symbols:
         for granularity in granularities:
+            if args.skip_existing and any(
+                    r["symbol"] == symbol and r["granularity"] == granularity
+                    for r in registry):
+                print(f"SKIP {symbol} {granularity}: already in registry", flush=True)
+                continue
             plan = plan_for(symbol, granularity)
             if args.smoke:
                 plan = {next(iter(plan)): plan[next(iter(plan))][:1]}
@@ -191,7 +198,6 @@ def main():
                         trade_penalty=cfg["trade_penalty"],
                         risk_penalty=cfg["risk_penalty"],
                         align_bonus=cfg["align_bonus"],
-                        hyperparams={"buffer_device": "gpu"},
                     )
                     from stable_baselines3 import PPO
 

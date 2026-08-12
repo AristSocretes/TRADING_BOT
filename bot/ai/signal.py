@@ -1,4 +1,5 @@
 import numpy as np
+import torch
 
 from bot.data.features import (
     FEATURE_COLUMNS,
@@ -27,7 +28,10 @@ class SignalGenerator:
                  cross_asset_dfs=None, entry_gate=0.0, min_confidence=0.0):
         from stable_baselines3 import PPO
 
-        self.model = PPO.load(model_path, device="cpu")
+        self.model = PPO.load(
+            model_path,
+            device="cuda" if torch.cuda.is_available() else "cpu",
+        )
         if window is None:
             obs_dim = self.model.observation_space.shape[0]
             sup_dim = sup_probs.shape[1] if sup_probs is not None else 0

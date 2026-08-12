@@ -1,0 +1,915 @@
+
+=== BTCUSDT 1h: 43793 rows (2021-08-10 14:00:00+00:00 .. 2026-08-09 13:00:00+00:00) cross=[] ===
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 7.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-125.09 +/- 3.05
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -125     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 4845   |
+|    iterations      | 1      |
+|    time_elapsed    | 54     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-80.03 +/- 1.92
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -80         |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.011903876 |
+|    clip_fraction        | 0.119       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.39       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.54        |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0158     |
+|    value_loss           | 1.24        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 2611   |
+|    iterations      | 2      |
+|    time_elapsed    | 200    |
+|    total_timesteps | 524288 |
+-------------------------------
+  fold 0: OOS sharpe=-3.956 ret=-0.2751 trades=213 (305s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-124.78 +/- 2.50
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -125     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 6471   |
+|    iterations      | 1      |
+|    time_elapsed    | 40     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-99.60 +/- 5.61
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -99.6       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.011777399 |
+|    clip_fraction        | 0.123       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.31       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.536       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0165     |
+|    value_loss           | 1.23        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 3278   |
+|    iterations      | 2      |
+|    time_elapsed    | 159    |
+|    total_timesteps | 524288 |
+-------------------------------
+  fold 1: OOS sharpe=-3.307 ret=-0.2159 trades=206 (232s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-125.51 +/- 5.18
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -126     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 6515   |
+|    iterations      | 1      |
+|    time_elapsed    | 40     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-92.23 +/- 5.98
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -92.2       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.011088144 |
+|    clip_fraction        | 0.114       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.31       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.541       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0156     |
+|    value_loss           | 1.23        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 3026   |
+|    iterations      | 2      |
+|    time_elapsed    | 173    |
+|    total_timesteps | 524288 |
+-------------------------------
+  FINAL BTCUSDT_1h.zip saved (634.1s) mean OOS sharpe=-3.631486035070207
+
+=== BTCUSDT 4h: 10955 rows (2021-08-10 20:00:00+00:00 .. 2026-08-10 12:00:00+00:00) cross=['ETHUSDT', 'SOLUSDT'] ===
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-131.99 +/- 4.90
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -132     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 4314   |
+|    iterations      | 1      |
+|    time_elapsed    | 60     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-82.67 +/- 2.53
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -82.7       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.013593939 |
+|    clip_fraction        | 0.138       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.35       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.542       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0142     |
+|    value_loss           | 1.23        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 2189   |
+|    iterations      | 2      |
+|    time_elapsed    | 239    |
+|    total_timesteps | 524288 |
+-------------------------------
+  fold 0: OOS sharpe=-2.970 ret=-0.2853 trades=153 (308s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-131.37 +/- 4.80
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -131     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 7262   |
+|    iterations      | 1      |
+|    time_elapsed    | 36     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-76.76 +/- 2.30
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -76.8       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.013260718 |
+|    clip_fraction        | 0.14        |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.35       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.53        |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0142     |
+|    value_loss           | 1.21        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 2020   |
+|    iterations      | 2      |
+|    time_elapsed    | 259    |
+|    total_timesteps | 524288 |
+-------------------------------
+  fold 1: OOS sharpe=-1.508 ret=-0.1217 trades=125 (413s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-132.67 +/- 3.18
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -133     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 6884   |
+|    iterations      | 1      |
+|    time_elapsed    | 38     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-83.58 +/- 2.81
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -83.6       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.012872155 |
+|    clip_fraction        | 0.134       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.33       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.533       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0145     |
+|    value_loss           | 1.21        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 2345   |
+|    iterations      | 2      |
+|    time_elapsed    | 223    |
+|    total_timesteps | 524288 |
+-------------------------------
+  FINAL BTCUSDT_4h.zip saved (673.5s) mean OOS sharpe=-2.238763102151415
+
+=== ETHUSDT 1h: 43797 rows (2021-08-13 08:00:00+00:00 .. 2026-08-12 07:00:00+00:00) cross=['BTCUSDT', 'SOLUSDT'] ===
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-126.07 +/- 5.57
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -126     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5544   |
+|    iterations      | 1      |
+|    time_elapsed    | 47     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-85.57 +/- 8.91
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -85.6       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.012006902 |
+|    clip_fraction        | 0.12        |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.09       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.532       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0164     |
+|    value_loss           | 1.24        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 1346   |
+|    iterations      | 2      |
+|    time_elapsed    | 389    |
+|    total_timesteps | 524288 |
+-------------------------------
+  fold 0: OOS sharpe=-2.427 ret=-0.3921 trades=428 (478s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-126.86 +/- 2.31
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -127     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 4793   |
+|    iterations      | 1      |
+|    time_elapsed    | 54     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-95.90 +/- 8.22
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -95.9       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.011977507 |
+|    clip_fraction        | 0.125       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.09       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.535       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0169     |
+|    value_loss           | 1.23        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 1352   |
+|    iterations      | 2      |
+|    time_elapsed    | 387    |
+|    total_timesteps | 524288 |
+-------------------------------
+  fold 1: OOS sharpe=-2.218 ret=-0.2460 trades=357 (488s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-126.36 +/- 3.95
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -126     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5168   |
+|    iterations      | 1      |
+|    time_elapsed    | 50     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-86.44 +/- 5.13
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -86.4       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.011688531 |
+|    clip_fraction        | 0.12        |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.07       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.534       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0165     |
+|    value_loss           | 1.23        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 1304   |
+|    iterations      | 2      |
+|    time_elapsed    | 402    |
+|    total_timesteps | 524288 |
+-------------------------------
+  FINAL ETHUSDT_1h.zip saved (582.2s) mean OOS sharpe=-2.3225821151500075
+
+=== ETHUSDT 4h: 10963 rows (2021-08-11 04:00:00+00:00 .. 2026-08-12 04:00:00+00:00) cross=['BTCUSDT', 'SOLUSDT'] ===
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-126.64 +/- 2.08
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -127     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5646   |
+|    iterations      | 1      |
+|    time_elapsed    | 46     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-79.78 +/- 3.33
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -79.8       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.013975738 |
+|    clip_fraction        | 0.144       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.32       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.537       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0149     |
+|    value_loss           | 1.24        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 2013   |
+|    iterations      | 2      |
+|    time_elapsed    | 260    |
+|    total_timesteps | 524288 |
+-------------------------------
+  fold 0: OOS sharpe=0.591 ret=0.0729 trades=200 (431s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-124.79 +/- 2.35
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -125     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5557   |
+|    iterations      | 1      |
+|    time_elapsed    | 47     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-74.44 +/- 2.06
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -74.4       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.013085308 |
+|    clip_fraction        | 0.14        |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.25       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.533       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0145     |
+|    value_loss           | 1.21        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 1936   |
+|    iterations      | 2      |
+|    time_elapsed    | 270    |
+|    total_timesteps | 524288 |
+-------------------------------
+  fold 1: OOS sharpe=-0.617 ret=-0.0823 trades=183 (491s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-126.54 +/- 2.55
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -127     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 4593   |
+|    iterations      | 1      |
+|    time_elapsed    | 57     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-78.46 +/- 1.78
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -78.5       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.013267374 |
+|    clip_fraction        | 0.138       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.29       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.531       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0147     |
+|    value_loss           | 1.21        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 1269   |
+|    iterations      | 2      |
+|    time_elapsed    | 413    |
+|    total_timesteps | 524288 |
+-------------------------------
+  FINAL ETHUSDT_4h.zip saved (581.6s) mean OOS sharpe=-0.01329984242663007
+
+=== SOLUSDT 1h: 43797 rows (2021-08-13 08:00:00+00:00 .. 2026-08-12 07:00:00+00:00) cross=['BTCUSDT', 'ETHUSDT'] ===
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-136.39 +/- 4.60
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -136     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5483   |
+|    iterations      | 1      |
+|    time_elapsed    | 47     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-83.70 +/- 3.08
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -83.7       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.012000597 |
+|    clip_fraction        | 0.12        |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.31       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.54        |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.016      |
+|    value_loss           | 1.26        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 1996   |
+|    iterations      | 2      |
+|    time_elapsed    | 262    |
+|    total_timesteps | 524288 |
+-------------------------------
+  fold 0: OOS sharpe=-3.279 ret=-0.5259 trades=618 (539s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-139.37 +/- 4.29
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -139     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 4831   |
+|    iterations      | 1      |
+|    time_elapsed    | 54     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-87.77 +/- 4.95
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -87.8       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.011719342 |
+|    clip_fraction        | 0.122       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.31       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.533       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0162     |
+|    value_loss           | 1.25        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 1446   |
+|    iterations      | 2      |
+|    time_elapsed    | 362    |
+|    total_timesteps | 524288 |
+-------------------------------
+  fold 1: OOS sharpe=-2.301 ret=-0.2672 trades=506 (511s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-135.32 +/- 4.28
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -135     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5664   |
+|    iterations      | 1      |
+|    time_elapsed    | 46     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-83.32 +/- 6.55
+Episode length: 2000.00 +/- 0.00
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 2e+03      |
+|    mean_reward          | -83.3      |
+| time/                   |            |
+|    total_timesteps      | 499968     |
+| train/                  |            |
+|    approx_kl            | 0.01161735 |
+|    clip_fraction        | 0.122      |
+|    clip_range           | 0.2        |
+|    clip_range_vf        | 0.2        |
+|    entropy_loss         | -1.09      |
+|    explained_variance   | -2.32      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 0.533      |
+|    n_updates            | 10         |
+|    policy_gradient_loss | -0.0164    |
+|    value_loss           | 1.25       |
+----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 1360   |
+|    iterations      | 2      |
+|    time_elapsed    | 385    |
+|    total_timesteps | 524288 |
+-------------------------------
+  FINAL SOLUSDT_1h.zip saved (714.0s) mean OOS sharpe=-2.789893015651887
+
+=== SOLUSDT 4h: 10963 rows (2021-08-11 04:00:00+00:00 .. 2026-08-12 04:00:00+00:00) cross=['BTCUSDT', 'ETHUSDT'] ===
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-132.48 +/- 3.67
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -132     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 4484   |
+|    iterations      | 1      |
+|    time_elapsed    | 58     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-87.95 +/- 2.87
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -87.9       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.013742913 |
+|    clip_fraction        | 0.141       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.4        |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.543       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0143     |
+|    value_loss           | 1.26        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 1329   |
+|    iterations      | 2      |
+|    time_elapsed    | 394    |
+|    total_timesteps | 524288 |
+-------------------------------
+  fold 0: OOS sharpe=-1.909 ret=-0.3129 trades=229 (806s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-129.71 +/- 3.79
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -130     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5796   |
+|    iterations      | 1      |
+|    time_elapsed    | 45     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-75.67 +/- 4.67
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -75.7       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.013276685 |
+|    clip_fraction        | 0.141       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.35       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.541       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0143     |
+|    value_loss           | 1.23        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 1577   |
+|    iterations      | 2      |
+|    time_elapsed    | 332    |
+|    total_timesteps | 524288 |
+-------------------------------
+  fold 1: OOS sharpe=-2.626 ret=-0.2414 trades=146 (585s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 5.0GB / 8.5GB
+Using cuda device
+Eval num_timesteps=249984, episode_reward=-131.94 +/- 2.54
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -132     |
+| time/              |          |
+|    total_timesteps | 249984   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5347   |
+|    iterations      | 1      |
+|    time_elapsed    | 49     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=499968, episode_reward=-86.30 +/- 6.34
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -86.3       |
+| time/                   |             |
+|    total_timesteps      | 499968      |
+| train/                  |             |
+|    approx_kl            | 0.013253656 |
+|    clip_fraction        | 0.143       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.31       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.544       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0149     |
+|    value_loss           | 1.24        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 1738   |
+|    iterations      | 2      |
+|    time_elapsed    | 301    |
+|    total_timesteps | 524288 |
+-------------------------------
+  FINAL SOLUSDT_4h.zip saved (393.0s) mean OOS sharpe=-2.267795789905775
+
+All done in 9178s. Registry: models\prod\registry.json
+  BTCUSDT 5m S=-1.3754281849446828 | ETHUSDT 5m S=-2.5804362675015176 | ETHUSDT 1m S=-75.4039847587522 | SOLUSDT 5m S=-3.7772255396048378 | SOLUSDT 1m S=-79.53303514618469 | BTCUSDT 1m S=-65.32186381809666 | BTCUSDT 1h S=-3.631486035070207 | BTCUSDT 4h S=-2.238763102151415 | ETHUSDT 1h S=-2.3225821151500075 | ETHUSDT 4h S=-0.01329984242663007 | SOLUSDT 1h S=-2.789893015651887 | SOLUSDT 4h S=-2.267795789905775

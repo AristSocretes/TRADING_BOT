@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Trading View — Live Predictions</title>
+<link rel="stylesheet" href="/static/style.css" />
+<script src="/static/lightweight-charts.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">▁▂▄</span>
+      <div>
+        <div class="brand-title">AI Trading View</div>
+        <div class="brand-sub">RL predictions · simulated account</div>
+      </div>
+    </div>
+
+    <div class="seg" id="symbolTabs">
+      <button data-symbol="BTCUSDT" class="seg-btn active">BTC &nbsp;<small>USDT</small></button>
+      <button data-symbol="ETHUSDT" class="seg-btn">ETH &nbsp;<small>USDT</small></button>
+      <button data-symbol="SOLUSDT" class="seg-btn">SOL &nbsp;<small>USDT</small></button>
+    </div>
+
+    <div class="seg" id="granTabs">
+      <button data-gran="1m" class="seg-btn">1m</button>
+      <button data-gran="5m" class="seg-btn active">5m</button>
+      <button data-gran="15m" class="seg-btn">15m</button>
+      <button data-gran="1h" class="seg-btn">1h</button>
+      <button data-gran="4h" class="seg-btn">4h</button>
+    </div>
+
+    <div class="modelbox">
+      <label for="modelSelect">Model</label>
+      <select id="modelSelect"></select>
+    </div>
+
+    <div class="right">
+      <button id="resetBtn" class="btn" title="Reset simulated account for this pair">Reset sim</button>
+      <a class="btn" href="http://localhost:8501" target="_blank" title="Open trainer progress dashboard">Trainers</a>
+      <div id="conn" class="chip">connecting…</div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="chart-wrap">
+      <div id="chartBar">
+        <div class="pair-chip" id="pairChip"></div>
+        <div id="predBadge" class="pred-badge hidden"></div>
+        <div class="next-chip" id="nextChip"><span>next bar</span><span id="nextBadge">—</span></div>
+      </div>
+      <div id="chart"></div>
+    </section>
+
+    <aside class="side">
+      <div class="panel">
+        <div class="panel-title">Next bar</div>
+        <div id="nextBadge" class="font-xl">—</div>
+        <div class="kv">
+          <span>Signal</span><b id="kvSignal">—</b>
+          <span>Confidence</span><b id="kvConf">—</b>
+          <span>Trend (60b)</span><b id="kvTrend">—</b>
+          <span>Model</span><b id="kvModel">—</b>
+          <span>Last close</span><b id="kvPrice">—</b>
+          <span>Bar</span><b id="kvBar">—</b>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Simulated account <span class="dim">(paper)</span></div>
+        <div class="acct-grid">
+          <div><div class="dim">Balance</div><div id="acctBal" class="font-lg">100,000.00</div></div>
+          <div><div class="dim">Position</div><div id="acctPos" class="font-lg">NEUTRAL</div></div>
+          <div><div class="dim">P&amp;L</div><div id="acctPnl" class="font-lg">0.00</div></div>
+          <div><div class="dim">Return</div><div id="acctRet" class="font-lg">0.00%</div></div>
+        </div>
+        <div id="equitySpark"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Recent signals</div>
+        <div id="signalLog" class="log"></div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="foot">
+    <span>Data: Bitget public WebSocket — live realtime candlestick simulation (Binance hosts blocked in-region) · Predictions: local RL model (CPU) · Simulated account (paper) — not financial advice.</span>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

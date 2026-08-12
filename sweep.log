@@ -1,0 +1,1302 @@
+
+=== BTCUSDT 5m: 211106 rows, 1048576 steps, seeds=[42, 7, 123, 777], train=168885 test=42221 ===
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 7.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=262144, episode_reward=-45.98 +/- 3.31
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -46      |
+| time/              |          |
+|    total_timesteps | 262144   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 6568   |
+|    iterations      | 1      |
+|    time_elapsed    | 39     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=524288, episode_reward=-28.27 +/- 2.33
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -28.3       |
+| time/                   |             |
+|    total_timesteps      | 524288      |
+| train/                  |             |
+|    approx_kl            | 0.007853404 |
+|    clip_fraction        | 0.0501      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -0.399      |
+|    learning_rate        | 0.000225    |
+|    loss                 | 0.12        |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.00491    |
+|    value_loss           | 0.322       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5568   |
+|    iterations      | 2      |
+|    time_elapsed    | 94     |
+|    total_timesteps | 524288 |
+-------------------------------
+Eval num_timesteps=786432, episode_reward=-25.12 +/- 1.93
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -25.1       |
+| time/                   |             |
+|    total_timesteps      | 786432      |
+| train/                  |             |
+|    approx_kl            | 0.009386143 |
+|    clip_fraction        | 0.11        |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.07       |
+|    explained_variance   | 0.306       |
+|    learning_rate        | 0.00015     |
+|    loss                 | 0.0122      |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0105     |
+|    value_loss           | 0.11        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5448   |
+|    iterations      | 3      |
+|    time_elapsed    | 144    |
+|    total_timesteps | 786432 |
+-------------------------------
+Eval num_timesteps=1048576, episode_reward=-24.55 +/- 4.70
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -24.6       |
+| time/                   |             |
+|    total_timesteps      | 1048576     |
+| train/                  |             |
+|    approx_kl            | 0.007568682 |
+|    clip_fraction        | 0.0758      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.04       |
+|    explained_variance   | 0.185       |
+|    learning_rate        | 7.5e-05     |
+|    loss                 | 0.0025      |
+|    n_updates            | 30          |
+|    policy_gradient_loss | -0.0085     |
+|    value_loss           | 0.0802      |
+-----------------------------------------
+New best mean reward!
+--------------------------------
+| time/              |         |
+|    fps             | 5362    |
+|    iterations      | 4       |
+|    time_elapsed    | 195     |
+|    total_timesteps | 1048576 |
+--------------------------------
+  seed 42: OOS sharpe=-1.206 ret=-0.0156 trades=3 (257.8s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 6.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=262144, episode_reward=-48.05 +/- 1.37
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -48      |
+| time/              |          |
+|    total_timesteps | 262144   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 8015   |
+|    iterations      | 1      |
+|    time_elapsed    | 32     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=524288, episode_reward=-25.41 +/- 1.82
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -25.4       |
+| time/                   |             |
+|    total_timesteps      | 524288      |
+| train/                  |             |
+|    approx_kl            | 0.008895593 |
+|    clip_fraction        | 0.0671      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -1.06       |
+|    learning_rate        | 0.000225    |
+|    loss                 | 0.119       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.00545    |
+|    value_loss           | 0.319       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 6283   |
+|    iterations      | 2      |
+|    time_elapsed    | 83     |
+|    total_timesteps | 524288 |
+-------------------------------
+Eval num_timesteps=786432, episode_reward=-22.60 +/- 2.89
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -22.6       |
+| time/                   |             |
+|    total_timesteps      | 786432      |
+| train/                  |             |
+|    approx_kl            | 0.009479549 |
+|    clip_fraction        | 0.11        |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.07       |
+|    explained_variance   | -0.0172     |
+|    learning_rate        | 0.00015     |
+|    loss                 | 0.0114      |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0103     |
+|    value_loss           | 0.105       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5849   |
+|    iterations      | 3      |
+|    time_elapsed    | 134    |
+|    total_timesteps | 786432 |
+-------------------------------
+Eval num_timesteps=1048576, episode_reward=-20.75 +/- 3.80
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -20.7       |
+| time/                   |             |
+|    total_timesteps      | 1048576     |
+| train/                  |             |
+|    approx_kl            | 0.007709751 |
+|    clip_fraction        | 0.0775      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.04       |
+|    explained_variance   | 0.0426      |
+|    learning_rate        | 7.5e-05     |
+|    loss                 | -0.000597   |
+|    n_updates            | 30          |
+|    policy_gradient_loss | -0.00904    |
+|    value_loss           | 0.0765      |
+-----------------------------------------
+New best mean reward!
+--------------------------------
+| time/              |         |
+|    fps             | 5575    |
+|    iterations      | 4       |
+|    time_elapsed    | 188     |
+|    total_timesteps | 1048576 |
+--------------------------------
+  seed 7: OOS sharpe=-3.690 ret=-0.0659 trades=6 (258.1s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 6.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=262144, episode_reward=-57.32 +/- 3.17
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -57.3    |
+| time/              |          |
+|    total_timesteps | 262144   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 6953   |
+|    iterations      | 1      |
+|    time_elapsed    | 37     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=524288, episode_reward=-26.34 +/- 2.53
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -26.3       |
+| time/                   |             |
+|    total_timesteps      | 524288      |
+| train/                  |             |
+|    approx_kl            | 0.007472282 |
+|    clip_fraction        | 0.0401      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.27       |
+|    learning_rate        | 0.000225    |
+|    loss                 | 0.151       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.00438    |
+|    value_loss           | 0.384       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5575   |
+|    iterations      | 2      |
+|    time_elapsed    | 94     |
+|    total_timesteps | 524288 |
+-------------------------------
+Eval num_timesteps=786432, episode_reward=-23.64 +/- 2.97
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -23.6       |
+| time/                   |             |
+|    total_timesteps      | 786432      |
+| train/                  |             |
+|    approx_kl            | 0.009450685 |
+|    clip_fraction        | 0.113       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.07       |
+|    explained_variance   | -0.777      |
+|    learning_rate        | 0.00015     |
+|    loss                 | 0.0189      |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.00972    |
+|    value_loss           | 0.121       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5267   |
+|    iterations      | 3      |
+|    time_elapsed    | 149    |
+|    total_timesteps | 786432 |
+-------------------------------
+Eval num_timesteps=1048576, episode_reward=-21.70 +/- 4.21
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -21.7       |
+| time/                   |             |
+|    total_timesteps      | 1048576     |
+| train/                  |             |
+|    approx_kl            | 0.007965767 |
+|    clip_fraction        | 0.0848      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.04       |
+|    explained_variance   | -0.296      |
+|    learning_rate        | 7.5e-05     |
+|    loss                 | 0.000174    |
+|    n_updates            | 30          |
+|    policy_gradient_loss | -0.00919    |
+|    value_loss           | 0.0763      |
+-----------------------------------------
+New best mean reward!
+--------------------------------
+| time/              |         |
+|    fps             | 5107    |
+|    iterations      | 4       |
+|    time_elapsed    | 205     |
+|    total_timesteps | 1048576 |
+--------------------------------
+  seed 123: OOS sharpe=-3.814 ret=-0.0815 trades=6 (273.4s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 6.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=262144, episode_reward=-32.11 +/- 0.63
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -32.1    |
+| time/              |          |
+|    total_timesteps | 262144   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 7066   |
+|    iterations      | 1      |
+|    time_elapsed    | 37     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=524288, episode_reward=-27.67 +/- 3.25
+Episode length: 2000.00 +/- 0.00
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 2e+03        |
+|    mean_reward          | -27.7        |
+| time/                   |              |
+|    total_timesteps      | 524288       |
+| train/                  |              |
+|    approx_kl            | 0.0088161295 |
+|    clip_fraction        | 0.0683       |
+|    clip_range           | 0.2          |
+|    clip_range_vf        | 0.2          |
+|    entropy_loss         | -1.09        |
+|    explained_variance   | -0.923       |
+|    learning_rate        | 0.000225     |
+|    loss                 | 0.11         |
+|    n_updates            | 10           |
+|    policy_gradient_loss | -0.00535     |
+|    value_loss           | 0.298        |
+------------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5703   |
+|    iterations      | 2      |
+|    time_elapsed    | 91     |
+|    total_timesteps | 524288 |
+-------------------------------
+Eval num_timesteps=786432, episode_reward=-24.81 +/- 3.53
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -24.8       |
+| time/                   |             |
+|    total_timesteps      | 786432      |
+| train/                  |             |
+|    approx_kl            | 0.009873506 |
+|    clip_fraction        | 0.124       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.07       |
+|    explained_variance   | -0.0993     |
+|    learning_rate        | 0.00015     |
+|    loss                 | 0.0111      |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0104     |
+|    value_loss           | 0.103       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5271   |
+|    iterations      | 3      |
+|    time_elapsed    | 149    |
+|    total_timesteps | 786432 |
+-------------------------------
+Eval num_timesteps=1048576, episode_reward=-23.49 +/- 5.26
+Episode length: 2000.00 +/- 0.00
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 2e+03      |
+|    mean_reward          | -23.5      |
+| time/                   |            |
+|    total_timesteps      | 1048576    |
+| train/                  |            |
+|    approx_kl            | 0.00762686 |
+|    clip_fraction        | 0.0764     |
+|    clip_range           | 0.2        |
+|    clip_range_vf        | 0.2        |
+|    entropy_loss         | -1.04      |
+|    explained_variance   | -0.0393    |
+|    learning_rate        | 7.5e-05    |
+|    loss                 | -0.00106   |
+|    n_updates            | 30         |
+|    policy_gradient_loss | -0.00886   |
+|    value_loss           | 0.0738     |
+----------------------------------------
+New best mean reward!
+--------------------------------
+| time/              |         |
+|    fps             | 5250    |
+|    iterations      | 4       |
+|    time_elapsed    | 199     |
+|    total_timesteps | 1048576 |
+--------------------------------
+  seed 777: OOS sharpe=-2.985 ret=-0.0457 trades=5 (264.3s)
+  FINAL BTCUSDT_5m.zip <- seed 42 (OOS S=-1.206)
+
+=== ETHUSDT 5m: 213537 rows, 1048576 steps, seeds=[42, 7, 123, 777], train=170830 test=42707 ===
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 6.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=262144, episode_reward=-47.03 +/- 5.53
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -47      |
+| time/              |          |
+|    total_timesteps | 262144   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 7398   |
+|    iterations      | 1      |
+|    time_elapsed    | 35     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=524288, episode_reward=-27.45 +/- 1.81
+Episode length: 2000.00 +/- 0.00
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 2e+03        |
+|    mean_reward          | -27.4        |
+| time/                   |              |
+|    total_timesteps      | 524288       |
+| train/                  |              |
+|    approx_kl            | 0.0090760775 |
+|    clip_fraction        | 0.0759       |
+|    clip_range           | 0.2          |
+|    clip_range_vf        | 0.2          |
+|    entropy_loss         | -1.09        |
+|    explained_variance   | -0.455       |
+|    learning_rate        | 0.000225     |
+|    loss                 | 0.118        |
+|    n_updates            | 10           |
+|    policy_gradient_loss | -0.00533     |
+|    value_loss           | 0.32         |
+------------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5862   |
+|    iterations      | 2      |
+|    time_elapsed    | 89     |
+|    total_timesteps | 524288 |
+-------------------------------
+Eval num_timesteps=786432, episode_reward=-25.28 +/- 1.52
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -25.3       |
+| time/                   |             |
+|    total_timesteps      | 786432      |
+| train/                  |             |
+|    approx_kl            | 0.009534284 |
+|    clip_fraction        | 0.115       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.07       |
+|    explained_variance   | 0.305       |
+|    learning_rate        | 0.00015     |
+|    loss                 | 0.0147      |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0101     |
+|    value_loss           | 0.11        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5517   |
+|    iterations      | 3      |
+|    time_elapsed    | 142    |
+|    total_timesteps | 786432 |
+-------------------------------
+Eval num_timesteps=1048576, episode_reward=-24.30 +/- 0.94
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -24.3       |
+| time/                   |             |
+|    total_timesteps      | 1048576     |
+| train/                  |             |
+|    approx_kl            | 0.007570763 |
+|    clip_fraction        | 0.0771      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.04       |
+|    explained_variance   | 0.151       |
+|    learning_rate        | 7.5e-05     |
+|    loss                 | 0.00255     |
+|    n_updates            | 30          |
+|    policy_gradient_loss | -0.00871    |
+|    value_loss           | 0.081       |
+-----------------------------------------
+New best mean reward!
+--------------------------------
+| time/              |         |
+|    fps             | 5378    |
+|    iterations      | 4       |
+|    time_elapsed    | 194     |
+|    total_timesteps | 1048576 |
+--------------------------------
+  seed 42: OOS sharpe=-1.212 ret=-0.0547 trades=21 (258.7s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 6.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=262144, episode_reward=-50.67 +/- 3.59
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -50.7    |
+| time/              |          |
+|    total_timesteps | 262144   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 7365   |
+|    iterations      | 1      |
+|    time_elapsed    | 35     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=524288, episode_reward=-27.31 +/- 3.29
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -27.3       |
+| time/                   |             |
+|    total_timesteps      | 524288      |
+| train/                  |             |
+|    approx_kl            | 0.008554327 |
+|    clip_fraction        | 0.0588      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -1          |
+|    learning_rate        | 0.000225    |
+|    loss                 | 0.122       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.00499    |
+|    value_loss           | 0.321       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5901   |
+|    iterations      | 2      |
+|    time_elapsed    | 88     |
+|    total_timesteps | 524288 |
+-------------------------------
+Eval num_timesteps=786432, episode_reward=-23.75 +/- 1.96
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -23.7       |
+| time/                   |             |
+|    total_timesteps      | 786432      |
+| train/                  |             |
+|    approx_kl            | 0.009530118 |
+|    clip_fraction        | 0.103       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.07       |
+|    explained_variance   | -0.0401     |
+|    learning_rate        | 0.00015     |
+|    loss                 | 0.0145      |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0101     |
+|    value_loss           | 0.11        |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5559   |
+|    iterations      | 3      |
+|    time_elapsed    | 141    |
+|    total_timesteps | 786432 |
+-------------------------------
+Eval num_timesteps=1048576, episode_reward=-23.02 +/- 1.75
+Episode length: 2000.00 +/- 0.00
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 2e+03        |
+|    mean_reward          | -23          |
+| time/                   |              |
+|    total_timesteps      | 1048576      |
+| train/                  |              |
+|    approx_kl            | 0.0075164265 |
+|    clip_fraction        | 0.0724       |
+|    clip_range           | 0.2          |
+|    clip_range_vf        | 0.2          |
+|    entropy_loss         | -1.04        |
+|    explained_variance   | -0.00948     |
+|    learning_rate        | 7.5e-05      |
+|    loss                 | 0.0015       |
+|    n_updates            | 30           |
+|    policy_gradient_loss | -0.00848     |
+|    value_loss           | 0.0775       |
+------------------------------------------
+New best mean reward!
+--------------------------------
+| time/              |         |
+|    fps             | 5338    |
+|    iterations      | 4       |
+|    time_elapsed    | 196     |
+|    total_timesteps | 1048576 |
+--------------------------------
+  seed 7: OOS sharpe=1.726 ret=0.0639 trades=34 (255.8s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 6.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=262144, episode_reward=-50.88 +/- 6.08
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -50.9    |
+| time/              |          |
+|    total_timesteps | 262144   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 7572   |
+|    iterations      | 1      |
+|    time_elapsed    | 34     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=524288, episode_reward=-26.76 +/- 3.98
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -26.8       |
+| time/                   |             |
+|    total_timesteps      | 524288      |
+| train/                  |             |
+|    approx_kl            | 0.008263783 |
+|    clip_fraction        | 0.0511      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.37       |
+|    learning_rate        | 0.000225    |
+|    loss                 | 0.153       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.00465    |
+|    value_loss           | 0.386       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 6013   |
+|    iterations      | 2      |
+|    time_elapsed    | 87     |
+|    total_timesteps | 524288 |
+-------------------------------
+Eval num_timesteps=786432, episode_reward=-22.12 +/- 2.17
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -22.1       |
+| time/                   |             |
+|    total_timesteps      | 786432      |
+| train/                  |             |
+|    approx_kl            | 0.009667733 |
+|    clip_fraction        | 0.112       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.07       |
+|    explained_variance   | -0.866      |
+|    learning_rate        | 0.00015     |
+|    loss                 | 0.0186      |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0101     |
+|    value_loss           | 0.121       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5604   |
+|    iterations      | 3      |
+|    time_elapsed    | 140    |
+|    total_timesteps | 786432 |
+-------------------------------
+Eval num_timesteps=1048576, episode_reward=-25.72 +/- 1.22
+Episode length: 2000.00 +/- 0.00
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 2e+03        |
+|    mean_reward          | -25.7        |
+| time/                   |              |
+|    total_timesteps      | 1048576      |
+| train/                  |              |
+|    approx_kl            | 0.0076807523 |
+|    clip_fraction        | 0.0774       |
+|    clip_range           | 0.2          |
+|    clip_range_vf        | 0.2          |
+|    entropy_loss         | -1.04        |
+|    explained_variance   | -0.295       |
+|    learning_rate        | 7.5e-05      |
+|    loss                 | 0.000702     |
+|    n_updates            | 30           |
+|    policy_gradient_loss | -0.00883     |
+|    value_loss           | 0.0759       |
+------------------------------------------
+--------------------------------
+| time/              |         |
+|    fps             | 5463    |
+|    iterations      | 4       |
+|    time_elapsed    | 191     |
+|    total_timesteps | 1048576 |
+--------------------------------
+  seed 123: OOS sharpe=0.237 ret=0.0078 trades=36 (251.3s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 6.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=262144, episode_reward=-27.76 +/- 2.54
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -27.8    |
+| time/              |          |
+|    total_timesteps | 262144   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 7287   |
+|    iterations      | 1      |
+|    time_elapsed    | 35     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=524288, episode_reward=-30.44 +/- 3.73
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -30.4       |
+| time/                   |             |
+|    total_timesteps      | 524288      |
+| train/                  |             |
+|    approx_kl            | 0.008356283 |
+|    clip_fraction        | 0.0583      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -1.06       |
+|    learning_rate        | 0.000225    |
+|    loss                 | 0.111       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.00509    |
+|    value_loss           | 0.302       |
+-----------------------------------------
+-------------------------------
+| time/              |        |
+|    fps             | 5927   |
+|    iterations      | 2      |
+|    time_elapsed    | 88     |
+|    total_timesteps | 524288 |
+-------------------------------
+Eval num_timesteps=786432, episode_reward=-22.89 +/- 2.63
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -22.9       |
+| time/                   |             |
+|    total_timesteps      | 786432      |
+| train/                  |             |
+|    approx_kl            | 0.010222494 |
+|    clip_fraction        | 0.128       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.07       |
+|    explained_variance   | -0.124      |
+|    learning_rate        | 0.00015     |
+|    loss                 | 0.0117      |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0109     |
+|    value_loss           | 0.107       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5623   |
+|    iterations      | 3      |
+|    time_elapsed    | 139    |
+|    total_timesteps | 786432 |
+-------------------------------
+Eval num_timesteps=1048576, episode_reward=-23.68 +/- 0.58
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -23.7       |
+| time/                   |             |
+|    total_timesteps      | 1048576     |
+| train/                  |             |
+|    approx_kl            | 0.007728841 |
+|    clip_fraction        | 0.0764      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.04       |
+|    explained_variance   | -0.0918     |
+|    learning_rate        | 7.5e-05     |
+|    loss                 | 0.000353    |
+|    n_updates            | 30          |
+|    policy_gradient_loss | -0.00886    |
+|    value_loss           | 0.0772      |
+-----------------------------------------
+--------------------------------
+| time/              |         |
+|    fps             | 5484    |
+|    iterations      | 4       |
+|    time_elapsed    | 191     |
+|    total_timesteps | 1048576 |
+--------------------------------
+  seed 777: OOS sharpe=-0.334 ret=-0.0188 trades=22 (250.4s)
+  FINAL ETHUSDT_5m.zip <- seed 7 (OOS S=1.726)
+
+=== SOLUSDT 5m: 213537 rows, 1048576 steps, seeds=[42, 7, 123, 777], train=170830 test=42707 ===
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 6.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=262144, episode_reward=-46.58 +/- 4.61
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -46.6    |
+| time/              |          |
+|    total_timesteps | 262144   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 8146   |
+|    iterations      | 1      |
+|    time_elapsed    | 32     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=524288, episode_reward=-31.50 +/- 2.37
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -31.5       |
+| time/                   |             |
+|    total_timesteps      | 524288      |
+| train/                  |             |
+|    approx_kl            | 0.008506928 |
+|    clip_fraction        | 0.0627      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -0.476      |
+|    learning_rate        | 0.000225    |
+|    loss                 | 0.122       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.00501    |
+|    value_loss           | 0.324       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 6396   |
+|    iterations      | 2      |
+|    time_elapsed    | 81     |
+|    total_timesteps | 524288 |
+-------------------------------
+Eval num_timesteps=786432, episode_reward=-26.55 +/- 2.24
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -26.6       |
+| time/                   |             |
+|    total_timesteps      | 786432      |
+| train/                  |             |
+|    approx_kl            | 0.009524595 |
+|    clip_fraction        | 0.113       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.07       |
+|    explained_variance   | 0.281       |
+|    learning_rate        | 0.00015     |
+|    loss                 | 0.0142      |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.00996    |
+|    value_loss           | 0.111       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5894   |
+|    iterations      | 3      |
+|    time_elapsed    | 133    |
+|    total_timesteps | 786432 |
+-------------------------------
+Eval num_timesteps=1048576, episode_reward=-25.74 +/- 1.92
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -25.7       |
+| time/                   |             |
+|    total_timesteps      | 1048576     |
+| train/                  |             |
+|    approx_kl            | 0.007424406 |
+|    clip_fraction        | 0.0713      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.04       |
+|    explained_variance   | 0.151       |
+|    learning_rate        | 7.5e-05     |
+|    loss                 | 0.00295     |
+|    n_updates            | 30          |
+|    policy_gradient_loss | -0.00847    |
+|    value_loss           | 0.0823      |
+-----------------------------------------
+New best mean reward!
+--------------------------------
+| time/              |         |
+|    fps             | 5493    |
+|    iterations      | 4       |
+|    time_elapsed    | 190     |
+|    total_timesteps | 1048576 |
+--------------------------------
+  seed 42: OOS sharpe=-3.507 ret=-0.1888 trades=43 (268.8s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 6.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=262144, episode_reward=-50.31 +/- 4.58
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -50.3    |
+| time/              |          |
+|    total_timesteps | 262144   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 6746   |
+|    iterations      | 1      |
+|    time_elapsed    | 38     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=524288, episode_reward=-26.48 +/- 1.27
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -26.5       |
+| time/                   |             |
+|    total_timesteps      | 524288      |
+| train/                  |             |
+|    approx_kl            | 0.008562026 |
+|    clip_fraction        | 0.0614      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -1.09       |
+|    learning_rate        | 0.000225    |
+|    loss                 | 0.123       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.00511    |
+|    value_loss           | 0.325       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 4860   |
+|    iterations      | 2      |
+|    time_elapsed    | 107    |
+|    total_timesteps | 524288 |
+-------------------------------
+Eval num_timesteps=786432, episode_reward=-23.31 +/- 3.08
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -23.3       |
+| time/                   |             |
+|    total_timesteps      | 786432      |
+| train/                  |             |
+|    approx_kl            | 0.009776346 |
+|    clip_fraction        | 0.11        |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.07       |
+|    explained_variance   | -0.136      |
+|    learning_rate        | 0.00015     |
+|    loss                 | 0.0154      |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0103     |
+|    value_loss           | 0.112       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 4700   |
+|    iterations      | 3      |
+|    time_elapsed    | 167    |
+|    total_timesteps | 786432 |
+-------------------------------
+Eval num_timesteps=1048576, episode_reward=-23.56 +/- 0.91
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -23.6       |
+| time/                   |             |
+|    total_timesteps      | 1048576     |
+| train/                  |             |
+|    approx_kl            | 0.007460517 |
+|    clip_fraction        | 0.0742      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.04       |
+|    explained_variance   | -0.104      |
+|    learning_rate        | 7.5e-05     |
+|    loss                 | 0.00147     |
+|    n_updates            | 30          |
+|    policy_gradient_loss | -0.00892    |
+|    value_loss           | 0.0785      |
+-----------------------------------------
+--------------------------------
+| time/              |         |
+|    fps             | 4477    |
+|    iterations      | 4       |
+|    time_elapsed    | 234     |
+|    total_timesteps | 1048576 |
+--------------------------------
+  seed 7: OOS sharpe=-3.815 ret=-0.1546 trades=34 (313.4s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 6.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=262144, episode_reward=-50.14 +/- 5.43
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -50.1    |
+| time/              |          |
+|    total_timesteps | 262144   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 7407   |
+|    iterations      | 1      |
+|    time_elapsed    | 35     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=524288, episode_reward=-29.70 +/- 1.81
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -29.7       |
+| time/                   |             |
+|    total_timesteps      | 524288      |
+| train/                  |             |
+|    approx_kl            | 0.008950076 |
+|    clip_fraction        | 0.0575      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -2.39       |
+|    learning_rate        | 0.000225    |
+|    loss                 | 0.159       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.00474    |
+|    value_loss           | 0.396       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5571   |
+|    iterations      | 2      |
+|    time_elapsed    | 94     |
+|    total_timesteps | 524288 |
+-------------------------------
+Eval num_timesteps=786432, episode_reward=-26.37 +/- 3.43
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -26.4       |
+| time/                   |             |
+|    total_timesteps      | 786432      |
+| train/                  |             |
+|    approx_kl            | 0.009745346 |
+|    clip_fraction        | 0.113       |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.07       |
+|    explained_variance   | -0.873      |
+|    learning_rate        | 0.00015     |
+|    loss                 | 0.0201      |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.00965    |
+|    value_loss           | 0.123       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5031   |
+|    iterations      | 3      |
+|    time_elapsed    | 156    |
+|    total_timesteps | 786432 |
+-------------------------------
+Eval num_timesteps=1048576, episode_reward=-25.85 +/- 1.48
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -25.8       |
+| time/                   |             |
+|    total_timesteps      | 1048576     |
+| train/                  |             |
+|    approx_kl            | 0.007953646 |
+|    clip_fraction        | 0.0826      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.04       |
+|    explained_variance   | -0.395      |
+|    learning_rate        | 7.5e-05     |
+|    loss                 | -0.000326   |
+|    n_updates            | 30          |
+|    policy_gradient_loss | -0.00901    |
+|    value_loss           | 0.0772      |
+-----------------------------------------
+New best mean reward!
+--------------------------------
+| time/              |         |
+|    fps             | 4906    |
+|    iterations      | 4       |
+|    time_elapsed    | 213     |
+|    total_timesteps | 1048576 |
+--------------------------------
+  seed 123: OOS sharpe=-1.633 ret=-0.0941 trades=48 (287.7s)
+  device: cuda
+  GPU: NVIDIA GeForce RTX 5050 Laptop GPU | free 6.4GB / 8.5GB
+Using cuda device
+Eval num_timesteps=262144, episode_reward=-28.57 +/- 2.44
+Episode length: 2000.00 +/- 0.00
+---------------------------------
+| eval/              |          |
+|    mean_ep_length  | 2e+03    |
+|    mean_reward     | -28.6    |
+| time/              |          |
+|    total_timesteps | 262144   |
+---------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 6282   |
+|    iterations      | 1      |
+|    time_elapsed    | 41     |
+|    total_timesteps | 262144 |
+-------------------------------
+Eval num_timesteps=524288, episode_reward=-32.25 +/- 2.50
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -32.2       |
+| time/                   |             |
+|    total_timesteps      | 524288      |
+| train/                  |             |
+|    approx_kl            | 0.008023559 |
+|    clip_fraction        | 0.0539      |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.09       |
+|    explained_variance   | -1.01       |
+|    learning_rate        | 0.000225    |
+|    loss                 | 0.111       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.00477    |
+|    value_loss           | 0.298       |
+-----------------------------------------
+-------------------------------
+| time/              |        |
+|    fps             | 5432   |
+|    iterations      | 2      |
+|    time_elapsed    | 96     |
+|    total_timesteps | 524288 |
+-------------------------------
+Eval num_timesteps=786432, episode_reward=-21.44 +/- 5.69
+Episode length: 2000.00 +/- 0.00
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2e+03       |
+|    mean_reward          | -21.4       |
+| time/                   |             |
+|    total_timesteps      | 786432      |
+| train/                  |             |
+|    approx_kl            | 0.009906122 |
+|    clip_fraction        | 0.12        |
+|    clip_range           | 0.2         |
+|    clip_range_vf        | 0.2         |
+|    entropy_loss         | -1.07       |
+|    explained_variance   | -0.121      |
+|    learning_rate        | 0.00015     |
+|    loss                 | 0.0123      |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0107     |
+|    value_loss           | 0.107       |
+-----------------------------------------
+New best mean reward!
+-------------------------------
+| time/              |        |
+|    fps             | 5240   |
+|    iterations      | 3      |
+|    time_elapsed    | 150    |
+|    total_timesteps | 786432 |
+-------------------------------
+Eval num_timesteps=1048576, episode_reward=-23.53 +/- 2.16
+Episode length: 2000.00 +/- 0.00
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 2e+03        |
+|    mean_reward          | -23.5        |
+| time/                   |              |
+|    total_timesteps      | 1048576      |
+| train/                  |              |
+|    approx_kl            | 0.0077048624 |
+|    clip_fraction        | 0.0772       |
+|    clip_range           | 0.2          |
+|    clip_range_vf        | 0.2          |
+|    entropy_loss         | -1.04        |
+|    explained_variance   | -0.0638      |
+|    learning_rate        | 7.5e-05      |
+|    loss                 | 0.00102      |
+|    n_updates            | 30           |
+|    policy_gradient_loss | -0.00915     |
+|    value_loss           | 0.0782       |
+------------------------------------------
+--------------------------------
+| time/              |         |
+|    fps             | 5163    |
+|    iterations      | 4       |
+|    time_elapsed    | 203     |
+|    total_timesteps | 1048576 |
+--------------------------------
+  seed 777: OOS sharpe=-1.528 ret=-0.0672 trades=36 (259.8s)
+  FINAL SOLUSDT_5m.zip <- seed 777 (OOS S=-1.528)
+
+All done in 3213s. Registry: models\prod_win\registry.json
+  BTCUSDT 1h S=-1.6884649313276057 | BTCUSDT 4h S=-0.8031516023706889 | BTCUSDT 1m S=0.0 | ETHUSDT 4h S=-0.6637776225136102 | ETHUSDT 1m S=0.0 | SOLUSDT 4h S=-1.2161076724754203 | SOLUSDT 1m S=0.0 | BTCUSDT 5m S=-1.20574190437909 | ETHUSDT 5m S=1.7257579221718389 | SOLUSDT 5m S=-1.5276973299818648

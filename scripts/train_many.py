@@ -140,7 +140,7 @@ def main():
 
                 best = Path(model_path).parent / "best_model.zip"
                 use = best if best.exists() else model_path
-                model = PPO.load(str(use), device="cpu")
+                model = PPO.load(str(use), device="auto")
                 curve, trades = rl_backtest(
                     test_df, model, window=args.window,
                     spread=settings.SPREAD, slippage=settings.SLIPPAGE,
