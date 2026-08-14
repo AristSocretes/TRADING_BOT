@@ -23,6 +23,7 @@ POSITION_LEVELS = np.array([-1.0, 0.0, 1.0], dtype=np.float32)
 
 class ForexTradingEnv(gym.Env):
     metadata = {"render_modes": []}
+    render_mode = None
 
     def __init__(
         self,

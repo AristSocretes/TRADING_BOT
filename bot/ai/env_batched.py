@@ -13,6 +13,7 @@ class BatchedForexVecEnv(VecEnv):
     """
 
     metadata = {"render_modes": []}
+    render_mode = None
 
     def __init__(
         self,

@@ -1,0 +1,152 @@
+[warmup/normal] get_model BTCUSDT 5m prod
+  loading model C:\Users\SUSHANT\Desktop\TRADING_BOT\models\prod\BTCUSDT_5m.zip
+  model ready
+[regime] BTCUSDT 1m failed: bad parameter or other API misuse
+[regime] SOLUSDT 4h fitted (CALM)
+[regime] PAXGUSDT 1d fitted (CALM)
+[regime] BTCUSDT 1d fitted (CALM)
+[regime] SLV 1d fitted (VOLATILE)
+[regime] ^IXIC 1d fitted (TREND)
+[regime] ^FTSE 1d fitted (CALM)
+[regime] PAXGUSDT 4h fitted (CHOP)
+[regime] PAXGUSDT 5m fitted (CHOP)
+[regime] ^GSPC 1d fitted (TREND)
+[regime] PAXGUSDT 1h fitted (CHOP)
+[regime] ETHUSDT 4h fitted (CALM)
+[regime] BTCUSDT 4h fitted (CALM)
+[regime] ^N225 1d fitted (CALM)
+[regime] BTCUSDT 1h fitted (CALM)
+[regime] SOLUSDT 5m fitted (VOLATILE)
+[regime] ^GDAXI 1d fitted (CALM)
+[regime] ETHUSDT 1h fitted (CALM)
+[regime] BTCUSDT 5m fitted (CALM)
+[regime] ETHUSDT 1m fitted (CHOP)
+[regime] EURUSD=X 1d fitted (CALM)
+[regime] SOLUSDT 1m fitted (CALM)
+[regime] ETHUSDT 5m fitted (CALM)
+[regime] USDINR=X 1d fitted (CALM)
+[regime] PAXGUSDT 1m fitted (CHOP)
+[regime] SOLUSDT 1h fitted (CALM)
+INFO:     127.0.0.1:55779 - "GET /api/health HTTP/1.1" 200 OK
+[warmup/normal] get_model BTCUSDT 5m prod
+[api] predict BTCUSDT 5m prod
+  data ok rows=420
+  feats+sim ok
+  predict ok NEUTRAL
+INFO:     127.0.0.1:54486 - "POST /api/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54497 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54498 - "GET /static/style.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54499 - "GET /static/app.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53733 - "GET /api/models HTTP/1.1" 200 OK
+[warmup/normal] get_model SOLUSDT 5m prod
+  loading model C:\Users\SUSHANT\Desktop\TRADING_BOT\models\prod\SOLUSDT_5m.zip
+  model ready
+[api] predict SOLUSDT 5m prod
+  data ok rows=420
+  feats+sim ok
+  predict ok NEUTRAL
+INFO:     127.0.0.1:53734 - "POST /api/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65446 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65460 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65479 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65492 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65505 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57780 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57793 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57809 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57824 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52328 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55397 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55410 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55428 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55442 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52722 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53016 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53033 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62904 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57141 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55041 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64335 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64350 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59865 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61485 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61501 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61518 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61533 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51511 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50478 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50500 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50515 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50541 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50556 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51090 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51103 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51118 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60215 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56477 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62678 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64534 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64547 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64560 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64573 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57665 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62177 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62205 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62237 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53154 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60064 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60090 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60110 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60138 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60167 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63620 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63638 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63655 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63669 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63683 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58095 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58111 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58125 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58139 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58154 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65346 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65359 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65372 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64570 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64589 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55321 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55337 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55350 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55363 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59837 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62747 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50708 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50721 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50724 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50734 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49813 - "GET /api/health HTTP/1.1" 200 OK
+[warmup/normal] get_model SOLUSDT 4h prod
+  loading model C:\Users\SUSHANT\Desktop\TRADING_BOT\models\prod\SOLUSDT_4h.zip
+  model ready
+[api] predict SOLUSDT 4h prod
+  data ok rows=420
+  feats+sim ok
+  predict ok NEUTRAL
+INFO:     127.0.0.1:49825 - "POST /api/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49834 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49853 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53948 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57878 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59894 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51958 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55098 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52474 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52487 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50944 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61948 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61962 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57176 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57155 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57982 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61107 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61120 - "GET /api/health HTTP/1.1" 200 OK

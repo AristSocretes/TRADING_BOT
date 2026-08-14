@@ -104,6 +104,15 @@ CONFIGS = {
     "full_impact": dict(timesteps=524_288, entropy=0.02, n_envs=64, **LOWCOST,
                         trade_penalty=0.02, risk_penalty=0.05, align_bonus=0.05,
                         full_features=True),
+    "full_lowcost_2M": dict(timesteps=2_097_152, entropy=0.02, n_envs=128, **LOWCOST,
+                            trade_penalty=0.02, risk_penalty=0.05, align_bonus=0.05,
+                            full_features=True),
+    "robust_2M": dict(timesteps=2_097_152, entropy=0.02, n_envs=128,
+                      spread=settings.SPREAD, slippage=settings.SLIPPAGE,
+                      trade_penalty=settings.TRADE_PENALTY,
+                      risk_penalty=settings.RISK_PENALTY,
+                      align_bonus=settings.ALIGN_BONUS,
+                      full_features=True),
 }
 
 
@@ -166,6 +175,22 @@ def round2_plan_for(granularity):
     }
 
 
+def round3_plan_for(granularity):
+    """Round-3 GPU plans: 2M-timestep configs (n_envs=128) across all seeds,
+    plus full_impact for breadth. The 1M lowcost config produced the BTC 5m
+    winner, so doubling timesteps is the natural escalation."""
+    if granularity == "1m":
+        return {
+            "full_lowcost_2M": SEEDS_BASE[:4],
+            "full_impact": SEEDS_BASE[:2],
+        }
+    return {
+        "full_lowcost_2M": SEEDS_BASE[:4],
+        "robust_2M": SEEDS_BASE[:4],
+        "full_impact": SEEDS_BASE[:3],
+    }
+
+
 def backtest_candidate(test_df, model, window, gate, stats, feat_cols, ppy,
                        impact_coef=0.0, max_dd_floor=0.0):
     curve, trades = rl_backtest(
@@ -198,7 +223,9 @@ def main():
                         help="Skip training candidates whose best_model.zip exists; "
                              "re-run only the OOS backtest + registry write")
     parser.add_argument("--round2", action="store_true",
-                        help="Use deeper 1M-timestep plans (all seeds)")
+                          help="Use deeper 1M-timestep plans (all seeds)")
+    parser.add_argument("--round3", action="store_true",
+                          help="Use 2M-timestep GPU plans (n_envs=128, all seeds)")
     parser.add_argument("--impact", type=float, default=0.0,
                         help="Almgren-Chriss square-root market impact coefficient")
     parser.add_argument("--dd-floor", type=float, default=0.0,
@@ -231,6 +258,8 @@ def main():
         plan = plan_for(symbol, granularity)
         if args.round2:
             plan = round2_plan_for(granularity)
+        if args.round3:
+            plan = round3_plan_for(granularity)
         if args.smoke:
             plan = {next(iter(plan)): plan[next(iter(plan))][:1]}
         df = cache.load(symbol, granularity)
