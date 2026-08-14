@@ -1,43 +1,95 @@
-/* TradingView-style live chart + predictions.
-   Real-time candlesticks (forming + closed) stream live from the Bitget public
-   WebSocket (Binance hosts are DNS-blocked in this region) — this IS the live
-   "simulated candlestick" view the chart is drawn from. All model inference +
-   the simulated paper account come from the local FastAPI server. */
+/* ============================================================
+   Apex — app shell
+   - hash router (#home / #auth / #trade)
+   - local auth gate (simulation environment)
+   - live trading dashboard: Bitget WebSocket candles, RL predictions,
+     HMM regime state, simulated account
+   ============================================================ */
 
 "use strict";
 
-const SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT"];
-const GRANS = ["1m", "5m", "15m", "1h", "4h"];
+/* ---------------- auth ---------------- */
+const AUTH_KEY = "apex_session_v1";
+
+function saveSession() { localStorage.setItem(AUTH_KEY, "1"); }
+function clearSession() { localStorage.removeItem(AUTH_KEY); }
+function hasSession() { return localStorage.getItem(AUTH_KEY) === "1"; }
+
+/* ---------------- router ---------------- */
+function showView(name) {
+  ["landing", "auth", "dash"].forEach((v) => {
+    $("view-" + v).classList.toggle("hidden", v !== name);
+  });
+  window.scrollTo(0, 0);
+}
+
+function route() {
+  const h = (location.hash || "#home").replace("#", "");
+  if (h === "trade" && !hasSession()) { location.hash = "auth"; return; }
+  if (h === "trade") { showView("dash"); bootDash(); }
+  else if (h === "auth") { showView("auth"); }
+  else { showView("landing"); }
+}
+
+/* ---------------- trading state ---------------- */
+let SYMBOLS = [];
+let GRANS = [];
+let CRYPTO_GRANS = [];
+let MODELS_INFO = { symbols: [], granularities: [], crypto_grans: [], available: {} };
+
 const WS_BASE = "wss://ws.bitget.com/v2/ws/public";
-// Bitget V2 spot candle channel names per timeframe
 const GRAN_TO_CHANNEL = {
   "1m": "candle1m", "5m": "candle5m", "15m": "candle15m",
-  "1h": "candle1H", "4h": "candle4H",
+  "1h": "candle1H", "4h": "candle4H", "1d": "candle1D",
 };
-const GRAN_SECONDS = { "1m": 60, "5m": 300, "15m": 900, "1h": 3600, "4h": 14400 };
+const GRAN_SECONDS = { "1m": 60, "5m": 300, "15m": 900, "1h": 3600, "4h": 14400, "1d": 86400 };
+const POLL_MS = 60000;
 
 const state = {
   symbol: "BTCUSDT",
   gran: "5m",
   model: "prod",
-  models: {},            // "SYM|GRAN" -> [names]
+  models: {},
   ws: null,
   wsTimer: null,
+  pollTimer: null,
   chart: null,
   candles: null,
-  markers: null,
   spark: null,
   _markers: [],
-  barTime: 0,            // open-time (s) of the currently-forming candle
-  lastClosedTime: 0,     // open-time (s) of the last bar the model was run on
+  lastPredBar: 0,
+  lastPolledBar: 0,
+  barTime: 0,
+  lastClosedTime: 0,
   firstBar: true,
   predInFlight: false,
-  countDown: null,       // setInterval id for the next-bar countdown
+  countDown: null,
+  booted: false,
 };
+
+function isCryptoSymbol(sym) {
+  const info = (MODELS_INFO.symbols || []).find((s) => s.symbol === sym);
+  return info ? !!info.crypto : false;
+}
+function gransForSymbol(sym) {
+  const all = isCryptoSymbol(sym) ? (CRYPTO_GRANS.length ? CRYPTO_GRANS : GRANS) : ["1d"];
+  const withModels = all.filter((g) => state.models[`${sym}|${g}`]);
+  return withModels.length ? withModels : all;
+}
 
 const $ = (id) => document.getElementById(id);
 
-/* ---------------- helpers ---------------- */
+async function fetchJSON(url, opts = {}, ms = 20000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  try {
+    const res = await fetch(url, { ...opts, signal: ctrl.signal });
+    return await res.json();
+  } finally {
+    clearTimeout(t);
+  }
+}
+
 function fmt(n, d = 2) {
   return Number(n).toLocaleString("en-US", {
     minimumFractionDigits: d, maximumFractionDigits: d,
@@ -49,10 +101,7 @@ function setConn(text, cls) {
   el.className = "chip" + (cls ? " " + cls : "");
 }
 
-/* Bitget message: {action, arg:{channel}, data:[[timeMs,o,h,l,c,v,quoteVol,...]]}
-   - snapshot: full history tail (we already have history from server, so we
-     just seed the forming candle from the snapshot's last entry).
-   - update: forming candle for the current period (re-pushes on every trade). */
+/* ---------------- Bitget feed ---------------- */
 function parseBitgetCandle(arr) {
   return {
     time: Math.floor(Number(arr[0]) / 1000),
@@ -67,7 +116,6 @@ function parseBitgetCandle(arr) {
 function stopCountdown() {
   if (state.countDown) { clearInterval(state.countDown); state.countDown = null; }
 }
-
 function startCountdown(closeEpochS) {
   const badge = $("nextBadge");
   stopCountdown();
@@ -88,52 +136,52 @@ function initChart() {
   if (state.chart) { state.chart.remove(); state.chart = null; }
   state.chart = LightweightCharts.createChart($("chart"), {
     layout: {
-      background: { type: "solid", color: "#131722" },
-      textColor: "#d1d4dc",
+      background: { type: "solid", color: "transparent" },
+      textColor: "#98989d",
       fontSize: 12,
     },
     grid: {
-      vertLines: { color: "#1e222d" },
-      horzLines: { color: "#1e222d" },
+      vertLines: { color: "rgba(255,255,255,0.045)" },
+      horzLines: { color: "rgba(255,255,255,0.045)" },
     },
-    rightPriceScale: { borderColor: "#2a2e39", scaleMargins: { top: 0.1, bottom: 0.25 } },
-    timeScale: { borderColor: "#2a2e39", timeVisible: true, secondsVisible: false },
+    rightPriceScale: { borderColor: "rgba(255,255,255,0.09)", scaleMargins: { top: 0.1, bottom: 0.25 } },
+    timeScale: { borderColor: "rgba(255,255,255,0.09)", timeVisible: true, secondsVisible: false },
     crosshair: {
       mode: LightweightCharts.CrosshairMode.Normal,
-      vertLine: { color: "#758696", width: 1, style: 3, labelBackgroundColor: "#2962ff" },
-      horzLine: { color: "#758696", width: 1, style: 3, labelBackgroundColor: "#2962ff" },
+      vertLine: { color: "#5ac8fa", width: 1, style: 3, labelBackgroundColor: "#0071e3" },
+      horzLine: { color: "#5ac8fa", width: 1, style: 3, labelBackgroundColor: "#0071e3" },
     },
     autoSize: true,
   });
   state.candles = state.chart.addCandlestickSeries({
-    upColor: "#26a69a", downColor: "#ef5350",
-    borderVisible: false, wickUpColor: "#26a69a", wickDownColor: "#ef5350",
+    upColor: "#22c55e", downColor: "#ef4444",
+    borderVisible: false, wickUpColor: "#22c55e", wickDownColor: "#ef4444",
     priceLineVisible: false,
   });
   const sparkWrap = $("equitySpark");
   if (state.spark) { state.spark.chart().remove(); state.spark = null; }
   state.spark = LightweightCharts.createChart(sparkWrap, {
-    layout: { background: { type: "solid", color: "#1e222d" }, textColor: "transparent" },
+    layout: { background: { type: "solid", color: "transparent" }, textColor: "transparent" },
     grid: { vertLines: { visible: false }, horzLines: { visible: false } },
     timeScale: { visible: false },
     rightPriceScale: { visible: false },
     autoSize: true,
   }).addAreaSeries({
-    lineColor: "#2962ff", topColor: "rgba(41,98,255,.35)", bottomColor: "rgba(41,98,255,0)",
+    lineColor: "#0a84ff", topColor: "rgba(10,132,255,.3)", bottomColor: "rgba(10,132,255,0)",
     lineWidth: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false,
   });
 }
 
-/* ---------------- data load ---------------- */
+/* ---------------- data ---------------- */
 async function loadHistory() {
   const url = `/api/history?symbol=${state.symbol}&gran=${state.gran}&n=420`;
-  const res = await fetch(url);
-  const data = await res.json();
+  const data = await fetchJSON(url, {}, 20000);
   if (!data.bars) throw new Error(data.error || "no history");
   state.candles.setData(data.bars);
   state.chart.timeScale().scrollToPosition(-5, false);
   state.firstBar = true;
   const last = data.bars[data.bars.length - 1];
+  if (last) state.lastPolledBar = last.time;
   $("pairChip").textContent = `${state.symbol} · ${state.gran.toUpperCase()}`;
   if (last) $("kvPrice").textContent = fmt(last.close, priceDecimals(last.close));
   return data;
@@ -143,12 +191,9 @@ function priceDecimals(p) {
   return p >= 100 ? 2 : p >= 1 ? 4 : 6;
 }
 
-function onKline(bar, closed) {
-  // bar.time is the open-time (s) of the candle. lightweight-charts.update()
-  // merges by time, so the in-progress candle is drawn live (realtime sim).
+function onKline(bar) {
   state.candles.update(bar);
   if (bar.time > state.barTime) {
-    // a NEW candle opened -> the previous one just closed
     if (state.barTime > 0) {
       state.lastClosedTime = state.barTime;
       runPrediction();
@@ -162,8 +207,7 @@ function onKline(bar, closed) {
 
 function onBitgetMsg(msg) {
   if (!msg || !msg.data) return;
-  const action = msg.action;
-  if (action === "snapshot") {
+  if (msg.action === "snapshot") {
     const bars = msg.data.map(parseBitgetCandle);
     bars.forEach((b) => state.candles.update(b));
     const last = bars[bars.length - 1];
@@ -174,39 +218,30 @@ function onBitgetMsg(msg) {
     setConn("REALTIME SIM ● live", "ok");
     return;
   }
-  // action === "update" -> live forming candle (the simulated candlestick)
   const bar = parseBitgetCandle(msg.data[0]);
-  const closed = bar.time !== state.barTime; // new period arrived == previous closed
-  onKline(bar, closed);
+  const closed = bar.time !== state.barTime;
+  onKline(bar);
+  state.chart.timeScale().scrollToRealTime();
   if (closed) {
-    state.chart.timeScale().scrollToRealTime();
     setConn("REALTIME SIM ● live", "ok");
     startCountdown(bar.time + GRAN_SECONDS[state.gran]);
-  } else {
-    state.chart.timeScale().scrollToRealTime();
   }
 }
 
 /* ---------------- prediction ---------------- */
 async function runPrediction() {
-  const now = Date.now() / 1000;
   if (state.predInFlight) return;
-  // server computes the prediction on `bar_time` = last closed bar in its cache;
-  // if it has not advanced past the last bar we predicted on, skip the duplicate
   const models = state.models[`${state.symbol}|${state.gran}`] || [];
-  const hasModel = !!models.length;
-  if (!hasModel) return;
+  if (!models.length) return;
   state.predInFlight = true;
   try {
-    const res = await fetch("/api/predict", {
+    const p = await fetchJSON("/api/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ symbol: state.symbol, gran: state.gran, model: state.model }),
-    });
-    const p = await res.json();
+    }, 60000);
     if (p.error) throw new Error(p.error);
-    if (p.bar_time <= state.lastClosedTime - 1 && state.lastPredBar === p.bar_time) {
-      // already saw this bar's prediction
+    if (state.lastPredBar === p.bar_time && state.lastClosedTime > 0) {
       drawPrediction(p);
       return;
     }
@@ -219,24 +254,48 @@ async function runPrediction() {
   }
 }
 
+function drawRegime(r) {
+  if (!r || !r.fitted) {
+    const chip = $("regimeChip");
+    chip.textContent = "fitting…";
+    chip.className = "regime-chip regime-chop";
+    $("regimeFactor").textContent = "size —";
+    $("regProbs").textContent = "—";
+    return;
+  }
+  const chip = $("regimeChip");
+  const label = (r.label || "CHOP").toUpperCase();
+  chip.textContent = label;
+  chip.className = "regime-chip regime-" + label.toLowerCase();
+  $("regimeFactor").textContent = `size ${(r.size_factor || 1).toFixed(2)}×`;
+  const probs = r.probs || {};
+  $("regProbs").textContent =
+    Object.entries(probs).map(([k, v]) => `${k} ${(v * 100).toFixed(0)}%`).join("  ");
+}
+
 function drawPrediction(p) {
   const conf = p.confidence;
   const badge = $("predBadge");
   const cls = p.label === "LONG" ? "long" : p.label === "SHORT" ? "short" : "neutral";
   badge.className = "pred-badge " + cls;
-  badge.textContent = `NEXT BAR: ${p.label} ${p.signal === 0 ? "" : p.signal > 0 ? "▲" : "▼"} ${(conf * 100).toFixed(1)}%`;
+  const lean = (p.bias && p.bias !== "NEUTRAL" && p.signal === 0)
+    ? ` · lean ${p.bias}` : "";
+  badge.textContent = `NEXT BAR: ${p.label} ${p.signal === 0 ? "" : p.signal > 0 ? "▲" : "▼"} ${(conf * 100).toFixed(1)}%${lean}`;
   badge.classList.remove("hidden");
 
-  $("kvSignal").textContent = p.label;
+  $("kvSignal").textContent = (p.bias && p.bias !== "NEUTRAL" && p.signal === 0)
+    ? `HOLD · lean ${p.bias}` : p.label;
   $("kvSignal").style.color = p.signal > 0 ? "var(--up)" : p.signal < 0 ? "var(--down)" : "var(--dim)";
   $("kvConf").textContent = (conf * 100).toFixed(1) + "%";
   $("kvTrend").textContent = (p.trend * 100).toFixed(2) + "%";
   $("kvModel").textContent = p.model;
   $("kvBar").textContent = new Date(p.bar_time * 1000).toUTCString().slice(0, 22);
+  $("kvVolTarget").textContent = (p.vol_target || 0).toFixed(2);
 
-  // marker on the bar the signal was formed on
+  drawRegime(p.regime);
+
   const shape = p.signal > 0 ? "arrowUp" : p.signal < 0 ? "arrowDown" : "circle";
-  const color = p.signal > 0 ? "#26a69a" : p.signal < 0 ? "#ef5350" : "#787b86";
+  const color = p.signal > 0 ? "#22c55e" : p.signal < 0 ? "#ef4444" : "#6e6e73";
   const position = p.signal > 0 ? "belowBar" : "aboveBar";
   const text = p.label === "NEUTRAL" ? "HOLD" : `${p.label} ${(conf * 100).toFixed(0)}%`;
   const markers = state._markers || [];
@@ -247,21 +306,31 @@ function drawPrediction(p) {
   state.candles.setMarkers(markers);
   state._markers = markers;
 
-  // account
-  const a = p.account;
+  const a = p.account || {};
   $("acctBal").textContent = fmt(a.balance, 2);
-  $("acctPos").textContent = a.position_label;
+  $("acctPos").textContent = a.position_label || "NEUTRAL";
   $("acctPos").style.color = a.position > 0 ? "var(--up)" : a.position < 0 ? "var(--down)" : "var(--dim)";
   $("acctPnl").textContent = (a.pnl >= 0 ? "+" : "") + fmt(a.pnl, 2);
   $("acctPnl").style.color = a.pnl >= 0 ? "var(--up)" : "var(--down)";
   $("acctRet").textContent = (a.return * 100).toFixed(2) + "%";
   $("acctRet").style.color = a.return >= 0 ? "var(--up)" : "var(--down)";
-  const pts = a.curve.map((pt, i) => ({ time: pt.t, value: pt.e })).slice(-120);
-  if (pts.length > 1 && state.spark) {
-    state.spark.setData(pts);
+
+  const ddRow = $("ddRow");
+  const ddBadge = $("ddBadge");
+  ddRow.classList.remove("hidden");
+  if (a.dd_locked) {
+    ddBadge.textContent = "LOCKED";
+    ddBadge.className = "dd-locked";
+    ddRow.style.borderColor = "rgba(239,68,68,0.35)";
+  } else {
+    ddBadge.textContent = `OK · ${(a.drawdown * 100).toFixed(1)}%`;
+    ddBadge.className = "dd-ok";
+    ddRow.style.borderColor = "";
   }
 
-  // log
+  const pts = (a.curve || []).map((pt) => ({ time: pt.t, value: pt.e })).slice(-120);
+  if (pts.length > 1 && state.spark) state.spark.setData(pts);
+
   const log = $("signalLog");
   const row = document.createElement("div");
   row.className = "row";
@@ -273,23 +342,42 @@ function drawPrediction(p) {
   while (log.children.length > 40) log.removeChild(log.lastChild);
 }
 
-/* ---------------- websocket (Bitget live feed) ---------------- */
+/* ---------------- feed plumbing ---------------- */
+function stopPolling() {
+  if (state.pollTimer) { clearInterval(state.pollTimer); state.pollTimer = null; }
+}
+function startPolling() {
+  stopPolling();
+  setConn("LIVE ● poll 60s", "ok");
+  state.pollTimer = setInterval(async () => {
+    try {
+      const data = await loadHistory();
+      const bars = data.bars || [];
+      const lastBar = bars.length ? bars[bars.length - 1].time : 0;
+      if (lastBar > state.lastPolledBar) {
+        state.lastPolledBar = lastBar;
+        runPrediction();
+      }
+    } catch (e) { /* keep polling */ }
+  }, POLL_MS);
+}
+
 function connectWS() {
   if (state.ws) {
     state.ws.onclose = null;
     state.ws.close();
   }
   stopCountdown();
+  if (!isCryptoSymbol(state.symbol)) { startPolling(); return; }
   setConn("REALTIME SIM ● connecting…");
   const chan = GRAN_TO_CHANNEL[state.gran];
   const ws = new WebSocket(WS_BASE);
   state.ws = ws;
   ws.onopen = () => {
-    const payload = JSON.stringify({
+    ws.send(JSON.stringify({
       op: "subscribe",
       args: [{ instType: "SPOT", channel: chan, instId: state.symbol }],
-    });
-    ws.send(payload);
+    }));
   };
   ws.onmessage = (ev) => {
     try { onBitgetMsg(JSON.parse(ev.data)); } catch (e) { /* skip */ }
@@ -302,12 +390,45 @@ function connectWS() {
   };
 }
 
-/* ---------------- model availability ---------------- */
+/* ---------------- models ---------------- */
 async function loadModels() {
-  const res = await fetch("/api/models");
-  const data = await res.json();
+  const data = await fetchJSON("/api/models", {}, 15000);
+  MODELS_INFO = data;
+  SYMBOLS = data.symbols || [];
+  GRANS = data.granularities || [];
+  CRYPTO_GRANS = data.crypto_grans || [];
   state.models = data.available || {};
+  renderSymbolTabs();
+  renderGranTabs();
   syncModelSelect();
+}
+
+function renderSymbolTabs() {
+  const wrap = $("symbolTabs");
+  wrap.innerHTML = "";
+  (SYMBOLS || []).forEach((s) => {
+    const b = document.createElement("button");
+    b.dataset.symbol = s.symbol;
+    b.className = "seg-btn" + (s.symbol === state.symbol ? " active" : "");
+    b.innerHTML = s.label.replace(/\s+/g, "&nbsp;");
+    b.addEventListener("click", () => switchSymbol(s.symbol));
+    wrap.appendChild(b);
+  });
+}
+
+function renderGranTabs() {
+  const wrap = $("granTabs");
+  wrap.innerHTML = "";
+  const grans = gransForSymbol(state.symbol);
+  if (!grans.includes(state.gran)) state.gran = grans[0];
+  grans.forEach((g) => {
+    const b = document.createElement("button");
+    b.dataset.gran = g;
+    b.className = "seg-btn" + (g === state.gran ? " active" : "");
+    b.textContent = g;
+    b.addEventListener("click", () => switchGran(g));
+    wrap.appendChild(b);
+  });
 }
 
 function syncModelSelect() {
@@ -338,24 +459,25 @@ function syncModelSelect() {
 /* ---------------- switching ---------------- */
 function switchSymbol(sym) {
   state.symbol = sym;
-  document.querySelectorAll("#symbolTabs button").forEach((b) =>
-    b.classList.toggle("active", b.dataset.symbol === sym));
+  renderSymbolTabs();
+  renderGranTabs();
   syncModelSelect();
   restart();
 }
 function switchGran(gran) {
   state.gran = gran;
-  document.querySelectorAll("#granTabs button").forEach((b) =>
-    b.classList.toggle("active", b.dataset.gran === gran));
+  renderGranTabs();
   syncModelSelect();
   restart();
 }
 function restart() {
   if (state.ws) { state.ws.onclose = null; state.ws.close(); }
+  stopPolling();
   clearTimeout(state.wsTimer);
   stopCountdown();
   state._markers = [];
   state.lastPredBar = 0;
+  state.lastPolledBar = 0;
   state.barTime = 0;
   state.lastClosedTime = 0;
   state.firstBar = true;
@@ -368,30 +490,48 @@ function restart() {
 }
 
 /* ---------------- boot ---------------- */
-initChart();
-loadModels();
-loadHistory()
-  .then(() => { setConn("REALTIME SIM ● starting…"); runPrediction(); connectWS(); })
-  .catch(() => { setConn("history err", "err"); connectWS(); });
-
-document.querySelectorAll("#symbolTabs button").forEach((b) =>
-  b.addEventListener("click", () => switchSymbol(b.dataset.symbol)));
-document.querySelectorAll("#granTabs button").forEach((b) =>
-  b.addEventListener("click", () => switchGran(b.dataset.gran)));
-$("modelSelect").addEventListener("change", (e) => {
-  state.model = e.target.value;
-});
-$("resetBtn").addEventListener("click", async () => {
-  await fetch("/api/reset", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ symbol: state.symbol, gran: state.gran }),
+function bootDash() {
+  if (state.booted) return;
+  state.booted = true;
+  initChart();
+  loadModels();
+  loadHistory()
+    .then(() => { setConn("REALTIME SIM ● starting…"); runPrediction(); connectWS(); })
+    .catch(() => { setConn("history err", "err"); connectWS(); });
+  $("modelSelect").addEventListener("change", (e) => { state.model = e.target.value; });
+  $("resetBtn").addEventListener("click", async () => {
+    await fetch("/api/reset", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ symbol: state.symbol, gran: state.gran }),
+    });
+    $("acctBal").textContent = "100,000.00";
+    $("acctPos").textContent = "NEUTRAL";
+    $("acctPos").style.color = "var(--dim)";
+    $("acctPnl").textContent = "0.00";
+    $("acctPnl").style.color = "var(--text)";
+    $("acctRet").textContent = "0.00%";
+    $("acctRet").style.color = "var(--text)";
   });
-  $("acctBal").textContent = "100,000.00";
-  $("acctPos").textContent = "NEUTRAL";
-  $("acctPos").style.color = "var(--dim)";
-  $("acctPnl").textContent = "0.00";
-  $("acctPnl").style.color = "var(--text)";
-  $("acctRet").textContent = "0.00%";
-  $("acctRet").style.color = "var(--text)";
+}
+
+/* ---------------- auth wiring ---------------- */
+$("authForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const email = $("authEmail").value.trim();
+  const pass = $("authPass").value;
+  const valid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) && pass.length >= 6;
+  if (!valid) {
+    $("authErr").classList.remove("hidden");
+    return;
+  }
+  $("authErr").classList.add("hidden");
+  saveSession();
+  location.hash = "trade";
 });
+
+$("authEmail").addEventListener("input", () => $("authErr").classList.add("hidden"));
+$("authPass").addEventListener("input", () => $("authErr").classList.add("hidden"));
+
+window.addEventListener("hashchange", route);
+route();

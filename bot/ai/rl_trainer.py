@@ -79,6 +79,10 @@ def train(
     lr_schedule=False,
     seed=42,
     feature_columns=None,
+    impact_coef=0.0,
+    max_dd_floor=0.0,
+    dd_penalty=0.5,
+    dd_recover=0.5,
 ):
     device = resolve_device(device)
     print(f"  device: {device}")
@@ -102,6 +106,10 @@ def train(
         "seed": seed,
         "episode_len": 2000,
         "feature_columns": feature_columns,
+        "impact_coef": impact_coef,
+        "max_dd_floor": max_dd_floor,
+        "dd_penalty": dd_penalty,
+        "dd_recover": dd_recover,
     }
     # Compute features once, share the matrix across all parallel envs
 

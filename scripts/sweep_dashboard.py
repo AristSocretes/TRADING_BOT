@@ -11,10 +11,8 @@ Sections:
   5. Raw registry export – downloadable JSON.
 """
 import json
-import sys
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 import streamlit as st
 
@@ -43,7 +41,9 @@ def cfg_name(cfg):
 # ── Page ──────────────────────────────────────────────────────────────
 st.set_page_config(page_title="Sweep Results Dashboard", layout="wide")
 st.title("📊 Sweep Results Dashboard")
-st.caption(f"Generated from {SWEEP_REGISTRY.name} · {len(load_registry())} candidates across 10 pairs")
+st.caption(
+    f"Generated from {SWEEP_REGISTRY.name} · {len(load_registry())} candidates across 10 pairs"
+)
 
 reg = load_registry()
 if not reg:
@@ -77,17 +77,24 @@ st.header("📈 Sweep Summary")
 col1, col2, col3 = st.columns(3)
 with col1:
     best_pair_str = f"{best_pair['symbol']} {best_pair['granularity']}"
-    st.metric("Best OOS Sharpe", f"{best_pair['oos_sharpe']:.3f}", f"{best_pair['oos_return']:+.3f} return")
+    st.metric(
+        "Best OOS Sharpe",
+        f"{best_pair['oos_sharpe']:.3f}",
+        f"{best_pair['oos_return']:+.3f} return",
+    )
 with col2:
     pos = (reg["oos_sharpe"] > 0).sum()
     st.metric("Positive OOS candidates", pos, f"{pos}/{len(reg)}")
 with col3:
-    st.metric("Promoted model", best_pair["model"], f"{best_pair['selected']['config']}/s{best_pair['selected']['seed']}")
+    st.metric("Promoted model", best_pair["model"],
+              f"{best_pair['selected']['config']}/s{best_pair['selected']['seed']}")
 
 # ── Pair‑wise detail ────────────────────────────────────────────────
 st.header("📍 Per‑pair results")
 pairs = sorted(df["symbol"].unique()) + ["All"]
-pair_sel = st.selectbox("Select pair", pairs, index=pairs.index("BTCUSDT") if "BTCUSDT" in pairs else 0)
+pair_sel = st.selectbox(
+    "Select pair", pairs, index=pairs.index("BTCUSDT") if "BTCUSDT" in pairs else 0
+)
 
 if pair_sel == "All":
     sub = df
@@ -139,8 +146,13 @@ if BEST_MODEL.exists():
         st.write(f"• OOS Sharpe: **{best_pair['oos_sharpe']:.3f}**")
         st.write(f"• OOS Return: **{best_pair['oos_return']:+.4f}**")
         st.write(f"• OOS Trades: **{best_pair['oos_trades']}**")
-        st.write(f"• Pre‑holdout Sharpe: **{best_pair['oos_pre_sharpe']:.2f}**")
-        st.write(f"• Config: **{best_pair['selected']['config']}** (seed **{best_pair['selected']['seed']}**)")
+        st.write(
+            f"• Pre‑holdout Sharpe: **{best_pair['oos_pre_sharpe']:.2f}**"
+        )
+        st.write(
+            f"• Config: **{best_pair['selected']['config']}** "
+            f"(seed **{best_pair['selected']['seed']}**)",
+        )
         st.write(f"• Model path: **{BEST_MODEL}**")
     if st.button("Open model in viewer"):
         st.code(f"python -m stable_baselines3.common.policies -m {BEST_MODEL}", language="python")

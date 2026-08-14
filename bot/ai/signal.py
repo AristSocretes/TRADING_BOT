@@ -22,7 +22,7 @@ def _obs_from_features(features, i, window, account=None, sup_probs=None):
 class SignalGenerator:
     # Feature counts this codebase has used over time; the window is derived
     # from the observation dim so models trained on either layout load fine.
-    _KNOWN_FEATURE_COUNTS = (44, len(FEATURE_COLUMNS), 57)
+    _KNOWN_FEATURE_COUNTS = (44, 88, len(FEATURE_COLUMNS), 57)
 
     def __init__(self, model_path, window=None, feature_stats=None, sup_probs=None,
                  cross_asset_dfs=None, entry_gate=0.0, min_confidence=0.0):

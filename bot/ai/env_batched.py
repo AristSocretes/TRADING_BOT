@@ -1,7 +1,7 @@
 import numpy as np
 from stable_baselines3.common.vec_env import VecEnv
 
-from bot.ai.env import POSITION_LEVELS
+from bot.ai.env import POSITION_LEVELS, _rolling_std
 from bot.data.features import normalized_frame
 
 
@@ -35,10 +35,37 @@ class BatchedForexVecEnv(VecEnv):
         reward_clip=0.25,
         seed=0,
         feature_columns=None,
+        impact_coef=0.0,
+        max_impact=0.02,
+        max_dd_floor=0.0,
+        dd_penalty=0.5,
+        dd_recover=0.5,
     ):
         self.closes = df["close"].to_numpy(dtype=np.float64)
         self.lows = df["low"].to_numpy(dtype=np.float64)
         self.highs = df["high"].to_numpy(dtype=np.float64)
+        self.impact_coef = impact_coef
+        self.max_impact = max_impact
+        self.max_dd_floor = max_dd_floor
+        self.dd_penalty = dd_penalty
+        self.dd_recover = dd_recover
+        if impact_coef > 0.0 or max_dd_floor > 0.0:
+            lr = np.log(self.closes[1:] / self.closes[:-1])
+            lr_std = np.empty(len(self.closes), dtype=np.float64)
+            lr_std[:1] = 0.0
+            lr_std[1:] = _rolling_std(lr, 20)
+            self.sigma_bar = np.maximum(lr_std, 1e-8)
+        else:
+            self.sigma_bar = None
+        if impact_coef > 0.0 and "volume" in df.columns and df["volume"].notna().any():
+            vol = df["volume"].to_numpy(dtype=np.float64)
+            adv = np.empty(len(self.closes), dtype=np.float64)
+            adv[0] = vol[0]
+            for j in range(1, len(self.closes)):
+                adv[j] = adv[j - 1] + (vol[j] - adv[j - 1]) / (j + 1)
+            self.adv_notional = np.maximum(adv * self.closes, 1.0)
+        else:
+            self.adv_notional = None
         if features_arr is None:
             features_arr = (
                 normalized_frame(
@@ -85,6 +112,8 @@ class BatchedForexVecEnv(VecEnv):
         self.start_equity = np.full(n_envs, 10000.0, dtype=np.float64)
         self.mark_price = np.zeros(n_envs, dtype=np.float64)
         self.pnl = np.zeros(n_envs, dtype=np.float64)
+        self.peak_equity = np.full(n_envs, 10000.0, dtype=np.float64)
+        self.dd_locked = np.zeros(n_envs, dtype=bool)
         self.ep_spread = np.full(n_envs, self.spread, dtype=np.float64)
         self.ep_slippage = np.full(n_envs, self.slippage, dtype=np.float64)
         self.reset()
@@ -110,6 +139,8 @@ class BatchedForexVecEnv(VecEnv):
         self.position[:] = 0.0
         self.equity[:] = 10000.0
         self.start_equity[:] = 10000.0
+        self.peak_equity[:] = 10000.0
+        self.dd_locked[:] = False
         self.mark_price = self.closes[start]
         self.pnl[:] = 0.0
         return self._obs()
@@ -162,6 +193,32 @@ class BatchedForexVecEnv(VecEnv):
         target = POSITION_LEVELS[actions].astype(np.float64)
         changed = np.abs(target - self.position) > 1e-6
         cost = (self.ep_spread / 2 + self.ep_slippage) * np.abs(target - self.position)
+
+        # Market impact (Almgren-Chriss square-root): coef * sigma * sqrt(Q/ADV)
+        if self.impact_coef > 0.0 and self.sigma_bar is not None:
+            if self.adv_notional is not None:
+                q = np.abs(target - self.position) * self.equity
+                ratio = q / self.adv_notional[i]
+                impact = np.where(
+                    ratio > 0.0,
+                    self.impact_coef * self.sigma_bar[i] * np.sqrt(np.maximum(ratio, 0.0)),
+                    0.0,
+                )
+                cost += np.minimum(impact, self.max_impact)
+
+        # Max drawdown floor (prop rule): force-flat + block re-entry.
+        dd_blocked = np.zeros(self.num_envs, dtype=bool)
+        if self.max_dd_floor > 0.0:
+            self.peak_equity = np.maximum(self.peak_equity, self.equity)
+            floor = self.peak_equity * (1 - self.max_dd_floor)
+            unlock = self.equity >= floor + self.dd_recover * self.peak_equity * self.max_dd_floor
+            self.dd_locked = np.where(self.dd_locked, ~unlock,
+                                      self.equity < floor)
+            flatten = self.dd_locked & (self.position != 0.0)
+            if flatten.any():
+                self._flatten(flatten)
+            dd_blocked = self.dd_locked & (target != 0.0)
+
         self.equity *= 1 - cost
         self.position = target
         self.mark_price = self.closes[i]
@@ -179,6 +236,8 @@ class BatchedForexVecEnv(VecEnv):
         rewards = log_ret - self.risk_penalty * self.position ** 2
         rewards[np.isnan(rewards)] = -self.reward_clip if self.reward_clip > 0 else -10.0
         rewards[changed] -= self.trade_penalty
+        if self.max_dd_floor > 0.0:
+            rewards[dd_blocked] -= self.dd_penalty
         if self.align_bonus > 0:
             trend = getattr(self, "trend", None)
             if trend is not None:
@@ -208,6 +267,20 @@ class BatchedForexVecEnv(VecEnv):
             self.equity[mask] = np.maximum(self.equity[mask], 1e-9)
             self.position[mask] = 0.0
 
+    def _flatten(self, mask):
+        """Force-close positions at current close (drawdown floor)."""
+        if mask.any():
+            pos = self.position[mask]
+            pnl = (
+                (self.closes[self.i[mask]] / self.mark_price[mask] - 1) * pos
+            )
+            self.equity[mask] *= 1 + pnl
+            cost = (self.ep_spread[mask] / 2 + self.ep_slippage[mask]) * np.abs(pos)
+            self.equity[mask] *= 1 - cost
+            self.equity[mask] = np.maximum(self.equity[mask], 1e-9)
+            self.position[mask] = 0.0
+            self.mark_price[mask] = self.closes[self.i[mask]]
+
     def _reset_envs(self, mask):
         max_start = self.n - self.window - self.episode_len - 1
         start = self.window + self._rng.integers(0, max(1, max_start), size=mask.sum())
@@ -217,6 +290,8 @@ class BatchedForexVecEnv(VecEnv):
         self.position[mask] = 0.0
         self.equity[mask] = 10000.0
         self.start_equity[mask] = 10000.0
+        self.peak_equity[mask] = 10000.0
+        self.dd_locked[mask] = False
         self.mark_price[mask] = self.closes[start]
         self.pnl[mask] = 0.0
 

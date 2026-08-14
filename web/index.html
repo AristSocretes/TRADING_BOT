@@ -2,34 +2,149 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>AI Trading View — Live Predictions</title>
-<link rel="stylesheet" href="/static/style.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#000000" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="description" content="Apex — the execution-aware reinforcement learning trading system." />
+<title>Apex — AI Trading</title>
+<link rel="stylesheet" href="/static/style.css?v=5" />
 <script src="/static/lightweight-charts.js"></script>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <span class="logo">▁▂▄</span>
-      <div>
-        <div class="brand-title">AI Trading View</div>
-        <div class="brand-sub">RL predictions · simulated account</div>
+
+<!-- ============ VIEW: LANDING ============ -->
+<section id="view-landing" class="view view-landing">
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#home">
+        <span class="brand-mark"><span class="bm-bar b1"></span><span class="bm-bar b2"></span><span class="bm-bar b3"></span><span class="bm-bar b4"></span></span>
+        <span class="brand-word">Apex</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#technology">Technology</a>
+        <a href="#status">Status</a>
+      </div>
+      <a class="btn btn-primary btn-small" href="#auth">Sign in</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge"><span class="pulse-dot"></span>Live · 23 models running</div>
+    <h1 class="hero-title">Trade with an AI<br />that <span class="grad-text">learns</span>.</h1>
+    <p class="hero-sub">Apex is an execution-aware reinforcement learning system that
+      models market impact, volatility regimes and drawdown risk —
+      then acts on live markets every single bar.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary btn-large" href="#auth">Open the terminal</a>
+      <a class="btn btn-ghost btn-large" href="#technology">How it works</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">23</div><div class="stat-label">Model pairs</div></div>
+      <div class="stat"><div class="stat-num">3.58</div><div class="stat-label">Best OOS Sharpe</div></div>
+      <div class="stat"><div class="stat-num">93</div><div class="stat-label">Features per bar</div></div>
+      <div class="stat"><div class="stat-num">0.25</div><div class="stat-label">Impact coeff</div></div>
+    </div>
+  </div>
+
+  <div id="features" class="section">
+    <h2 class="section-title">Everything a prop desk does. <span class="dim">On autopilot.</span></h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">◈</div>
+        <h3>Reinforcement learning</h3>
+        <p>PPO policies trained on 300k+ timesteps with per-bar costs, risk penalties
+          and alignment bonuses. Every model is validated out-of-sample with
+          bootstrap significance statistics.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">◊</div>
+        <h3>Execution-aware</h3>
+        <p>Almgren–Chriss square-root market impact in training and live simulation.
+          Vol-targeted position sizing. A prop-style max-drawdown floor that locks
+          trading when breached.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">✦</div>
+        <h3>Regime detection</h3>
+        <p>A Gaussian hidden Markov model classifies each bar as CALM, TREND,
+          VOLATILE or CHOP using conditional volatility — and scales exposure
+          down when the market turns violent.</p>
       </div>
     </div>
+  </div>
 
-    <div class="seg" id="symbolTabs">
-      <button data-symbol="BTCUSDT" class="seg-btn active">BTC &nbsp;<small>USDT</small></button>
-      <button data-symbol="ETHUSDT" class="seg-btn">ETH &nbsp;<small>USDT</small></button>
-      <button data-symbol="SOLUSDT" class="seg-btn">SOL &nbsp;<small>USDT</small></button>
+  <div id="technology" class="section section-dark">
+    <h2 class="section-title">Built on the research that runs real desks.</h2>
+    <div class="tech-grid">
+      <div class="tech">
+        <h4>GARCH(1,1) + EWMA volatility</h4>
+        <p>Conditional variance features with per-frequency half-lives — the RiskMetrics
+          recursion, vectorized forward without look-ahead.</p>
+      </div>
+      <div class="tech">
+        <h4>Bailey &amp; López de Prado PSR</h4>
+        <p>Probabilistic Sharpe ratio and Lo (2002) standard errors gate which
+          model earns a production slot. No lucky backtests.</p>
+      </div>
+      <div class="tech">
+        <h4>Stationary bootstrap</h4>
+        <p>Politis–Romano block resampling produces honest confidence intervals
+          for every out-of-sample Sharpe ratio.</p>
+      </div>
+      <div class="tech">
+        <h4>Cross-asset context</h4>
+        <p>Each instrument sees normalized relatives of its market peers —
+          indices, currencies and metals — as part of its observation.</p>
+      </div>
     </div>
+  </div>
 
-    <div class="seg" id="granTabs">
-      <button data-gran="1m" class="seg-btn">1m</button>
-      <button data-gran="5m" class="seg-btn active">5m</button>
-      <button data-gran="15m" class="seg-btn">15m</button>
-      <button data-gran="1h" class="seg-btn">1h</button>
-      <button data-gran="4h" class="seg-btn">4h</button>
+  <div id="status" class="section">
+    <h2 class="section-title">System status</h2>
+    <div class="status-row">
+      <div class="status-cell"><span class="dot dot-ok"></span><span>Model server</span><b>online</b></div>
+      <div class="status-cell"><span class="dot dot-ok"></span><span>Live feeds</span><b>streaming</b></div>
+      <div class="status-cell"><span class="dot dot-ok"></span><span>Regime models</span><b>fitted</b></div>
+      <div class="status-cell"><span class="dot dot-ok"></span><span>Watchdog</span><b>armed</b></div>
     </div>
+    <div class="foot-note">Paper simulation only — not financial advice.</div>
+  </div>
+</section>
+
+<!-- ============ VIEW: AUTH ============ -->
+<section id="view-auth" class="view view-auth hidden">
+  <div class="auth-card">
+    <div class="auth-logo"><span class="brand-mark"><span class="bm-bar b1"></span><span class="bm-bar b2"></span><span class="bm-bar b3"></span><span class="bm-bar b4"></span></span></div>
+    <h1 class="auth-title">Sign in to Apex</h1>
+    <p class="auth-sub">Use any email and a password of 6+ characters.<br />This is a local simulation environment.</p>
+    <form id="authForm" autocomplete="off">
+      <label class="field">
+        <span>Email</span>
+        <input id="authEmail" type="email" placeholder="you@example.com" required />
+      </label>
+      <label class="field">
+        <span>Password</span>
+        <input id="authPass" type="password" placeholder="••••••••" required />
+      </label>
+      <div id="authErr" class="auth-err hidden">Please enter a valid email and a password of at least 6 characters.</div>
+      <button type="submit" class="btn btn-primary btn-block btn-large">Continue</button>
+    </form>
+    <a class="auth-back" href="#home">← Back to home</a>
+  </div>
+</section>
+
+<!-- ============ VIEW: DASHBOARD ============ -->
+<section id="view-dash" class="view view-dash hidden">
+  <header class="topbar">
+    <a class="brand" href="#home" title="Home">
+      <span class="brand-mark"><span class="bm-bar b1"></span><span class="bm-bar b2"></span><span class="bm-bar b3"></span><span class="bm-bar b4"></span></span>
+      <span class="brand-word">Apex</span>
+    </a>
+
+    <div class="seg" id="symbolTabs"></div>
+
+    <div class="seg" id="granTabs"></div>
 
     <div class="modelbox">
       <label for="modelSelect">Model</label>
@@ -37,8 +152,8 @@
     </div>
 
     <div class="right">
-      <button id="resetBtn" class="btn" title="Reset simulated account for this pair">Reset sim</button>
-      <a class="btn" href="http://localhost:8501" target="_blank" title="Open trainer progress dashboard">Trainers</a>
+      <button id="resetBtn" class="btn btn-small" title="Reset simulated account for this pair">Reset sim</button>
+      <a class="btn btn-small" href="http://localhost:8501" target="_blank" title="Open trainer progress dashboard">Trainers</a>
       <div id="conn" class="chip">connecting…</div>
     </div>
   </header>
@@ -48,7 +163,7 @@
       <div id="chartBar">
         <div class="pair-chip" id="pairChip"></div>
         <div id="predBadge" class="pred-badge hidden"></div>
-        <div class="next-chip" id="nextChip"><span>next bar</span><span id="nextBadge">—</span></div>
+        <div class="next-chip"><span>next bar</span><span id="nextBadge">—</span></div>
       </div>
       <div id="chart"></div>
     </section>
@@ -56,7 +171,6 @@
     <aside class="side">
       <div class="panel">
         <div class="panel-title">Next bar</div>
-        <div id="nextBadge" class="font-xl">—</div>
         <div class="kv">
           <span>Signal</span><b id="kvSignal">—</b>
           <span>Confidence</span><b id="kvConf">—</b>
@@ -68,13 +182,28 @@
       </div>
 
       <div class="panel">
+        <div class="panel-title">Market state <span class="dim">(HMM)</span></div>
+        <div class="regime-row">
+          <span id="regimeChip" class="regime-chip regime-calm">CALM</span>
+          <span class="dim" id="regimeFactor">size 1.00×</span>
+        </div>
+        <div class="kv">
+          <span>P(CALM)</span><b id="regProbs" class="mono">—</b>
+        </div>
+        <div class="kv">
+          <span>Vol target</span><b id="kvVolTarget" class="mono">—</b>
+        </div>
+      </div>
+
+      <div class="panel">
         <div class="panel-title">Simulated account <span class="dim">(paper)</span></div>
         <div class="acct-grid">
-          <div><div class="dim">Balance</div><div id="acctBal" class="font-lg">100,000.00</div></div>
+          <div><div class="dim">Balance</div><div id="acctBal" class="font-lg mono">100,000.00</div></div>
           <div><div class="dim">Position</div><div id="acctPos" class="font-lg">NEUTRAL</div></div>
-          <div><div class="dim">P&amp;L</div><div id="acctPnl" class="font-lg">0.00</div></div>
-          <div><div class="dim">Return</div><div id="acctRet" class="font-lg">0.00%</div></div>
+          <div><div class="dim">P&amp;L</div><div id="acctPnl" class="font-lg mono">0.00</div></div>
+          <div><div class="dim">Return</div><div id="acctRet" class="font-lg mono">0.00%</div></div>
         </div>
+        <div id="ddRow" class="dd-row hidden"><span>Drawdown floor</span><b id="ddBadge" class="dd-ok">OK</b></div>
         <div id="equitySpark"></div>
       </div>
 
@@ -86,9 +215,11 @@
   </main>
 
   <footer class="foot">
-    <span>Data: Bitget public WebSocket — live realtime candlestick simulation (Binance hosts blocked in-region) · Predictions: local RL model (CPU) · Simulated account (paper) — not financial advice.</span>
+    <span>Data: Bitget public WebSocket — live realtime candlestick simulation · Predictions: local RL models · Paper account — not financial advice.</span>
+    <a href="#home">← Sign out</a>
   </footer>
+</section>
 
-  <script src="/static/app.js"></script>
+<script src="/static/app.js?v=5"></script>
 </body>
 </html>

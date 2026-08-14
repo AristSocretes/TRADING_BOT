@@ -11,10 +11,35 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import numpy as np
 
 from bot.ai.backtest import metrics, rl_backtest
+from bot.ai.bootstrap import bootstrap_ci, psr, sharpe_ci, sharpe_se
 from bot.ai.rl_trainer import train
 from bot.data.cache import DataCache
 from bot.data.features import feature_stats_for
 from config import settings
+
+
+def add_bootstrap_stats(rec, curve, ppy):
+    """Lo SR SE/CI + PSR + stationary-bootstrap CI on the OOS curve returns."""
+    returns = curve.pct_change().dropna().to_numpy(dtype=np.float64)
+    n = int(len(returns))
+    sr = float(rec["sharpe"])
+    if n < 30 or not np.isfinite(sr):
+        rec["oos_sharpe_se"] = None
+        rec["oos_psr"] = None
+        rec["oos_sharpe_ci"] = None
+        rec["oos_sharpe_ci_boot"] = None
+        return rec
+    rec["oos_sharpe_se"] = round(sharpe_se(sr, n, periods_per_year=ppy), 4)
+    lo, hi = sharpe_ci(sr, n, periods_per_year=ppy)
+    rec["oos_sharpe_ci"] = [round(lo, 3), round(hi, 3)]
+    rec["oos_psr"] = round(psr(returns, benchmark_sharpe=0.0,
+                               periods_per_year=ppy), 4)
+    try:
+        blo, bhi = bootstrap_ci(returns, n_boot=500, mean_block=20, seed=0)
+        rec["oos_sharpe_ci_boot"] = [round(blo, 3), round(bhi, 3)]
+    except Exception:
+        rec["oos_sharpe_ci_boot"] = None
+    return rec
 
 
 def periods_per_year(granularity: str) -> int:
@@ -53,6 +78,10 @@ def main():
     parser.add_argument("--data-end", default=None,
                         help="Pin the data snapshot (e.g. '2026-08-10 16:00') so "
                         "validation folds don't drift as the cache grows")
+    parser.add_argument("--impact", type=float, default=0.0,
+                        help="Almgren-Chriss square-root market impact coefficient")
+    parser.add_argument("--dd-floor", type=float, default=0.0,
+                        help="Max drawdown floor as fraction of peak equity (prop rule)")
     args = parser.parse_args()
 
     symbols = parse_list(args.symbols, ["BTCUSDT", "ETHUSDT", "SOLUSDT"])
@@ -135,6 +164,8 @@ def main():
                     cross_asset_dfs=cross_asset_dfs,
                     eval_freq=args.eval_freq,
                     seed=args.seed,
+                    impact_coef=args.impact,
+                    max_dd_floor=args.dd_floor,
                 )
                 from stable_baselines3 import PPO
 
@@ -149,9 +180,12 @@ def main():
                     entry_gate=entry_gate,
                     feature_stats=feat_stats,
                     cross_asset_dfs=cross_asset_dfs,
+                    impact_coef=args.impact,
+                    max_dd_floor=args.dd_floor,
                 )
                 ppy = periods_per_year(granularity)
                 report = {"fold": fold, **metrics(curve, trades, periods_per_year=ppy)}
+                add_bootstrap_stats(report, curve, ppy)
                 bh = float(test_df["close"].iloc[-1] / test_df["close"].iloc[60] - 1)
                 report["buy_hold"] = bh
                 report["train_rows"] = len(train_df)
@@ -160,6 +194,7 @@ def main():
                 report["test_end"] = str(test_df.index[-1])
                 folds.append(report)
                 print(f"  fold {fold}: OOS sharpe={report['sharpe']:.3f} "
+                      f"PSR={report.get('oos_psr', 0):.2f} "
                       f"ret={report['total_return']:.4f} trades={report['n_trades']} "
                       f"({time.time()-t0:.0f}s)", flush=True)
 
@@ -184,6 +219,8 @@ def main():
                 cross_asset_dfs=cross_asset_dfs,
                 eval_freq=args.eval_freq,
                 seed=args.seed,
+                impact_coef=args.impact,
+                max_dd_floor=args.dd_floor,
             )
             best = Path(model_path).parent / "best_model.zip"
             if best.exists():
@@ -210,6 +247,8 @@ def main():
                 "seed": int(args.seed),
                 "folds": folds,
                 "mean_oos_sharpe": float(np.mean([f["sharpe"] for f in folds])) if folds else None,
+                "market_impact_coef": float(args.impact),
+                "max_dd_floor": float(args.dd_floor),
                 "train_wall_s": round(time.time() - t0, 1),
             }
             registry = [r for r in registry
